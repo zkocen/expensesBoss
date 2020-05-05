@@ -18,6 +18,8 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store/app.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,12 @@ import { MatInputModule } from '@angular/material';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
   ],
   providers: [
     { provide: 'baseUrl', useValue: baseUrl },

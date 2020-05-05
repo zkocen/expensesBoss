@@ -12,6 +12,9 @@ import {
 import { MatDatepicker } from '@angular/material/datepicker';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.state';
+import { selectedMonth } from '../store/UI/date-picker/date-picker.selector';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -43,17 +46,19 @@ export const MY_FORMATS = {
 })
 export class DatePickerComponent implements OnInit, OnChanges {
   public date = new FormControl(moment());
-  public currentMonth: string;
+  public currentMonth$ = this.store.select(selectedMonth);
+
+  public constructor(public store: Store<AppState>) {}
 
   public ngOnInit() {}
 
   public ngOnChanges() {}
 
-  chosenMonthHandler(selectedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+  chosenMonthHandler(selectedM: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value;
-    ctrlValue.month(selectedMonth.month());
+    ctrlValue.month(selectedM.month());
     this.date.setValue(ctrlValue);
-    this.currentMonth = selectedMonth.toISOString();
+    console.log('selectedM', selectedM.format('MM/YYYY'));
     datepicker.close();
   }
 }
