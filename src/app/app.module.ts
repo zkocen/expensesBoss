@@ -12,13 +12,20 @@ import { JwtInterceptor } from './shared/jwt.interceptor';
 import { ErrorInterceptor } from './shared/error.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { baseUrl } from './shared/baseUrl';
-
+import { MonthlyExpensesComponent } from './monthly-expenses/monthly-expenses.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DatePickerComponent } from './date-picker/date-picker.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    MonthlyExpensesComponent,
+    DatePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +33,10 @@ import { baseUrl } from './shared/baseUrl';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
   ],
   providers: [
     { provide: 'baseUrl', useValue: baseUrl },
