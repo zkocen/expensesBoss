@@ -1,2 +1,14 @@
 <app-date-picker></app-date-picker> selectedMonth$:
-{{ selectedMonth$ | async | json }}
+
+<!-- {{selectedMonth$  | async | json}} -->
+<ng-container *ngIf="selectedMonth$ | async; let cm">
+  <h3>{{ cm.currentMonth }}</h3>
+  <ng-container *ngFor="let expense of cm.expenses">
+    <mat-card>
+      <p>Name: {{ expense.name }}</p>
+      <p>Amount: {{ expense.amount }}</p>
+      <p>Paid: {{ expense.paidBy }}</p>
+    </mat-card>
+  </ng-container>
+  <!-- <h4>Overall total: {{ expensesTotalOverall$ | async }}</h4> -->
+</ng-container>

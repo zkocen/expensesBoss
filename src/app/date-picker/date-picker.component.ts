@@ -35,7 +35,13 @@ export class DatePickerComponent implements OnInit {
   public constructor(public store: Store<AppState>) {}
   public date = new FormControl(moment());
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    this.store.dispatch(
+      setCurrentMonth({
+        currentMonth: [this.date.value.format(MY_FORMATS.parse.dateInput)],
+      })
+    );
+  }
 
   chosenMonthHandler(selectedM: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value;
