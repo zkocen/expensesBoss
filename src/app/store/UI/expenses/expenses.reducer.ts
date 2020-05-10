@@ -2,10 +2,10 @@ import { ExpensesState, Expense } from './expenses.state';
 import * as moment from 'moment';
 import { createReducer, on, Action } from '@ngrx/store';
 import * as ExpensesActions from './expense.actions';
-
-export const currentMonth = moment().month();
+import { MY_FORMATS } from 'src/app/shared/formats';
 
 export const expensesInitialState: ExpensesState = {
+  currentMonth: [moment().format(MY_FORMATS.parse.dateInput)],
   expenses: [
     {
       id: 0,
@@ -22,34 +22,14 @@ export const expensesInitialState: ExpensesState = {
 
 export const expensesReducer = createReducer(
   expensesInitialState,
-  // on(
-  //   ExpensesActions.setExpensesState,
-  //   (
-  //     itemState,
-  //     { id, month, dateEntered, recurring, category, name, amount, paidBy }
-  //   ) => ({
-  //     ...itemState,
-  //     expenses: itemState.expenses.map((expense) => {
-  //       if (id === expense.id && month === expense.month) {
-  //         return {
-  //           id,
-  //           month,
-  //           dateEntered,
-  //           recurring,
-  //           category,
-  //           name,
-  //           amount,
-  //           paidBy,
-  //         };
-  //       }
-  //       return expense;
-  //     }),
-  //   })
-  // ),
   on(ExpensesActions.loadExpenses, (state) => ({ ...state })),
-  on(ExpensesActions.loadExpensesSuccess, (_, data): any => {
-    return { expenses: data.expenses };
-  })
+  on(ExpensesActions.loadExpensesSuccess, (state, data): any => {
+    return { currentMonth: [state.currentMonth], expenses: data.expenses };
+  }),
+  on(ExpensesActions.setCurrentMonth, (state, { currentMonth }) => ({
+    ...state,
+    currentMonth,
+  }))
 );
 
 export function exReducer(

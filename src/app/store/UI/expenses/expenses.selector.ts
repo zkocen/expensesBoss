@@ -16,10 +16,36 @@ export const expensesTotalOverall = createSelector(
   }
 );
 
-export const selectedMonth = createSelector(allExpenses, (state: Expense[]) => {
-  return Object.entries(
-    groupBy(state, (x: { month: string }) => {
-      return x.month;
-    })
-  );
-});
+export const expensesPerMonth = createSelector(
+  allExpenses,
+  (state: Expense[]) => {
+    return Object.entries(
+      groupBy(state, (x: { month: string }) => {
+        return x.month;
+      })
+    );
+  }
+);
+
+export const selectedMonth = createSelector(
+  ExState,
+  expensesPerMonth,
+  (exState: ExpensesState, exPm: any) => {
+    let res = [];
+
+    console.log('exState', exState);
+    // console.log('exPm', exPm);
+
+    exPm.map((m) => {
+      console.log('m0', m);
+      console.log('ddd', exState.currentMonth[0]);
+      if (m[0] === exState.currentMonth[0]) {
+        console.log('eee');
+        res = m[1];
+      }
+    });
+
+    console.log('res', res);
+    return res;
+  }
+);

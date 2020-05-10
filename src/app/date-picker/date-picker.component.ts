@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   MomentDateAdapter,
@@ -14,22 +14,8 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import { allExpenses } from '../store/UI/expenses/expenses.selector';
-// import { selectedMonth } from '../store/UI/expenses/expenses.selector';
-
-// See the Moment.js docs for the meaning of these formats:
-// https://momentjs.com/docs/#/displaying/format/
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'MM/YYYY',
-  },
-  display: {
-    dateInput: 'MMMM - YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
+import { setCurrentMonth } from '../store/UI/expenses/expense.actions';
+import { MY_FORMATS } from '../shared/formats';
 
 @Component({
   selector: 'app-date-picker',
@@ -45,23 +31,22 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
-export class DatePickerComponent implements OnInit, OnChanges {
-  // public currentMonth$ = this.store.select(selectedMonth);
-
+export class DatePickerComponent implements OnInit {
   public constructor(public store: Store<AppState>) {}
   public date = new FormControl(moment());
 
-  public allExpenses$ = this.store.select(allExpenses);
-
   public ngOnInit() {}
-
-  public ngOnChanges() {}
 
   chosenMonthHandler(selectedM: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value;
     ctrlValue.month(selectedM.month());
     this.date.setValue(ctrlValue);
-    console.log('selectedM', selectedM.format('MM/YYYY'));
+
+    this.store.dispatch(
+      setCurrentMonth({
+        currentMonth: [selectedM.format(MY_FORMATS.parse.dateInput)],
+      })
+    );
     datepicker.close();
   }
 }

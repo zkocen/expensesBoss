@@ -1,4 +1,5 @@
 export interface ExpensesState {
+  currentMonth: string[];
   expenses: Expense[];
 }
 

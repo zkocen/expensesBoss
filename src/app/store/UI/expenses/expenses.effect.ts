@@ -13,7 +13,9 @@ export class ExpensesEffect {
       mergeMap(() =>
         this.expensesService.getExpenses().pipe(
           map((expense) => {
-            return ExpensesActions.loadExpensesSuccess({ expenses: expense });
+            return ExpensesActions.loadExpensesSuccess({
+              expenses: expense,
+            });
           }),
           catchError(() =>
             catchError(() => of({ type: '[Movies API] Movies Loaded Error' }))

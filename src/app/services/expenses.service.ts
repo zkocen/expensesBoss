@@ -20,4 +20,10 @@ export class ExpensesService {
       .get<Expense>(baseUrl + 'expenses')
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
+
+  public getCurrentMonth(): Observable<Expense> {
+    return this.http
+      .get<Expense>(baseUrl + 'currentMonth')
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
 }

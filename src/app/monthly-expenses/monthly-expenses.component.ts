@@ -1,11 +1,8 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { take, map } from 'rxjs/operators';
-import { Store, State } from '@ngrx/store';
-import {
-  allExpenses,
-  selectedMonth,
-} from '../store/UI/expenses/expenses.selector';
+import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
+import { selectedMonth } from '../store/UI/expenses/expenses.selector';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-monthly-expenses',

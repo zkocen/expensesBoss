@@ -27,6 +27,8 @@ import { USER_PROVIDED_EFFECTS, EffectsModule } from '@ngrx/effects';
 import { ExpensesEffect } from './store/UI/expenses/expenses.effect';
 import { ExpensesDashboardComponent } from './expenses-dashboard/expenses-dashboard.component';
 import { AllExpensesComponent } from './all-expenses/all-expenses.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environment
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +60,10 @@ import { AllExpensesComponent } from './all-expenses/all-expenses.component';
       },
     }),
     EffectsModule.forRoot([ExpensesEffect]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [{ provide: 'baseUrl', useValue: baseUrl }],
   bootstrap: [AppComponent],
