@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { AppState } from './app.state';
-import { dpReducer } from './UI/date-picker/date-picker.reducer';
+import { exReducer } from './UI/expenses/expenses.reducer';
 
 export const reducers: ActionReducerMap<AppState> = {
-  uiDatePicker: dpReducer,
+  uiExpenses: exReducer,
 };

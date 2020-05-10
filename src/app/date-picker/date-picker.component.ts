@@ -14,7 +14,8 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import { selectedMonth } from '../store/UI/date-picker/date-picker.selector';
+import { allExpenses } from '../store/UI/expenses/expenses.selector';
+// import { selectedMonth } from '../store/UI/expenses/expenses.selector';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -45,10 +46,12 @@ export const MY_FORMATS = {
   ],
 })
 export class DatePickerComponent implements OnInit, OnChanges {
-  public date = new FormControl(moment());
-  public currentMonth$ = this.store.select(selectedMonth);
+  // public currentMonth$ = this.store.select(selectedMonth);
 
   public constructor(public store: Store<AppState>) {}
+  public date = new FormControl(moment());
+
+  public allExpenses$ = this.store.select(allExpenses);
 
   public ngOnInit() {}
 

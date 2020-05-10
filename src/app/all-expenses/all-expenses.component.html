@@ -1,0 +1,13 @@
+  <button mat-raised-button (click)=toggle()>All Expenses Ever</button>
+  <ng-container *ngIf="show">
+    <h3>All Expenses</h3>
+    <ng-container *ngFor="let expense of expensesList$ | async">
+      <mat-card>
+        <h4>Month: {{ expense.month }}</h4>
+        <p>Name: {{ expense.name }}</p>
+        <p>Amount: {{ expense.amount }}</p>
+        <p>Paid: {{ expense.paidBy }}</p>
+      </mat-card>
+    </ng-container>
+    <h4>Overall total: {{ expensesTotalOverall$ | async }}</h4>
+  </ng-container>

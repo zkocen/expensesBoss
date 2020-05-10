@@ -1,5 +1,5 @@
-import { DatePickerState } from './UI/date-picker/date-picker.state';
+import { ExpensesState } from './UI/expenses/expenses.state';
 
 export interface AppState {
-  uiDatePicker: DatePickerState;
+  uiExpenses: ExpensesState;
 }

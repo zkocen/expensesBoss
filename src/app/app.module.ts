@@ -7,9 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { JwtInterceptor } from './shared/jwt.interceptor';
-import { ErrorInterceptor } from './shared/error.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { baseUrl } from './shared/baseUrl';
 import { MonthlyExpensesComponent } from './monthly-expenses/monthly-expenses.component';
@@ -17,9 +15,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatInputModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatCardModule,
+  MatButtonModule,
+} from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
+import { ExpenseComponent } from './expense/expense.component';
+import { USER_PROVIDED_EFFECTS, EffectsModule } from '@ngrx/effects';
+import { ExpensesEffect } from './store/UI/expenses/expenses.effect';
+import { ExpensesDashboardComponent } from './expenses-dashboard/expenses-dashboard.component';
+import { AllExpensesComponent } from './all-expenses/all-expenses.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +35,9 @@ import { reducers } from './store/app.reducer';
     HomeComponent,
     MonthlyExpensesComponent,
     DatePickerComponent,
+    ExpenseComponent,
+    ExpensesDashboardComponent,
+    AllExpensesComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,18 +49,17 @@ import { reducers } from './store/app.reducer';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    MatCardModule,
+    MatButtonModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
       },
     }),
+    EffectsModule.forRoot([ExpensesEffect]),
   ],
-  providers: [
-    { provide: 'baseUrl', useValue: baseUrl },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
+  providers: [{ provide: 'baseUrl', useValue: baseUrl }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

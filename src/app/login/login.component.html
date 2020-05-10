@@ -1,4 +1,4 @@
-<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="error" class="alert alert-danger">{{error | json}}</div>
 <h2>Login</h2>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
