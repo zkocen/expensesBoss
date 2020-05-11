@@ -2,7 +2,6 @@ import { AppState } from '../../app.state';
 import { ExpensesState, Expense } from './expenses.state';
 import { createSelector } from '@ngrx/store';
 import { groupBy } from 'lodash';
-import { filter } from 'rxjs/operators';
 
 export const ExState = (state: AppState) => state.uiExpenses;
 
@@ -69,4 +68,26 @@ export const paidByUser = createSelector(selectedMonth, (state: any) => {
   }
 
   return result;
+});
+
+export const debtCalc = createSelector(paidByUser, (state: any) => {
+  const total = state.reduce((a, b) => a + b.amount, 0);
+  const sharePerUser = total / state.length;
+  const res = [];
+
+  state.map((x) => {
+    if (x.amount > sharePerUser) {
+      res.push({
+        user: x.paidBy,
+        oves: false,
+        amount: x.amount - sharePerUser,
+      });
+    } else if (x.amount < sharePerUser) {
+      res.push({ user: x.paidBy, oves: true, amount: sharePerUser - x.amount });
+    } else {
+      res.push({ user: x.paidBy, oves: false, amount: 0 });
+    }
+  });
+
+  return res;
 });

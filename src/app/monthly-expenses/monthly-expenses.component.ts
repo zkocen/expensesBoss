@@ -4,6 +4,7 @@ import { AppState } from '../store/app.state';
 import {
   selectedMonth,
   paidByUser,
+  debtCalc,
 } from '../store/UI/expenses/expenses.selector';
 import { map } from 'rxjs/operators';
 
@@ -17,6 +18,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
 
   public selectedMonth$ = this.store.select(selectedMonth);
   public paidByUser$ = this.store.select(paidByUser);
+  public debtCalc$ = this.store.select(debtCalc);
 
   ngOnChanges() {}
 

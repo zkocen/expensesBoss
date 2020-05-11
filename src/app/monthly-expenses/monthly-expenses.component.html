@@ -1,6 +1,18 @@
 <app-date-picker></app-date-picker>
-
-<ng-container *ngFor="let usr of paidByUser$ | async">
+<!-- debtCalc$: {{debtCalc$  | async | json}} -->
+<ng-container *ngFor="let dbt of debtCalc$ | async">
+  <mat-card>
+    <p>Name: {{ dbt.user }}</p>
+    <ng-container *ngIf="dbt.oves">
+      <p>Needs to pay {{dbt.amount}}</p>
+    </ng-container>
+    <ng-container>
+      <p>Will get {{dbt.amount}}</p>
+    </ng-container>
+  </mat-card>
+</ng-container>
+<br />
+<ng-container *ngFor=" let usr of paidByUser$ | async">
   <mat-card>
     <p>Name: {{ usr.paidBy }}</p>
     <p>Paid: {{ usr.amount }}</p>
