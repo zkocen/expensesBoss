@@ -1,7 +1,10 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import { selectedMonth } from '../store/UI/expenses/expenses.selector';
+import {
+  selectedMonth,
+  paidByUser,
+} from '../store/UI/expenses/expenses.selector';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -13,6 +16,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
   constructor(private store: Store<AppState>) {}
 
   public selectedMonth$ = this.store.select(selectedMonth);
+  public paidByUser$ = this.store.select(paidByUser);
 
   ngOnChanges() {}
 

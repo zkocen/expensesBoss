@@ -14,7 +14,10 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import { setCurrentMonth } from '../store/UI/expenses/expense.actions';
+import {
+  setCurrentMonth,
+  loadExpenses,
+} from '../store/UI/expenses/expense.actions';
 import { MY_FORMATS } from '../shared/formats';
 
 @Component({
@@ -36,6 +39,7 @@ export class DatePickerComponent implements OnInit {
   public date = new FormControl(moment());
 
   public ngOnInit() {
+    this.store.dispatch(loadExpenses());
     this.store.dispatch(
       setCurrentMonth({
         currentMonth: [this.date.value.format(MY_FORMATS.parse.dateInput)],

@@ -2,6 +2,7 @@ import { AppState } from '../../app.state';
 import { ExpensesState, Expense } from './expenses.state';
 import { createSelector } from '@ngrx/store';
 import { groupBy } from 'lodash';
+import { filter } from 'rxjs/operators';
 
 export const ExState = (state: AppState) => state.uiExpenses;
 
@@ -42,3 +43,30 @@ export const selectedMonth = createSelector(
     return { currentMonth: [exState.currentMonth[0]], expenses: res };
   }
 );
+
+export const paidByUser = createSelector(selectedMonth, (state: any) => {
+  let result = [];
+
+  if (state.expenses.length > 0) {
+    result = [
+      ...state.expenses
+        .reduce((r, o) => {
+          const key = o.paidBy;
+
+          const item =
+            r.get(key) ||
+            Object.assign({}, o, {
+              name: '',
+              amount: 0,
+            });
+
+          item.name += ' ' + o.name;
+          item.amount += o.amount;
+          return r.set(key, item);
+        }, new Map())
+        .values(),
+    ];
+  }
+
+  return result;
+});

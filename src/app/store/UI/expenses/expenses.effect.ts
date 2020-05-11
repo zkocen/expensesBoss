@@ -18,7 +18,9 @@ export class ExpensesEffect {
             });
           }),
           catchError(() =>
-            catchError(() => of({ type: '[Movies API] Movies Loaded Error' }))
+            catchError(() =>
+              of({ type: '[Expenses API] Expenses Loaded Error' })
+            )
           )
         )
       )

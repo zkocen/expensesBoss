@@ -9,9 +9,5 @@ import { loadExpenses } from '../store/UI/expenses/expense.actions';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private store: Store<AppState>) {}
-
-  ngOnInit() {
-    this.store.dispatch(loadExpenses());
-  }
+  ngOnInit() {}
 }
