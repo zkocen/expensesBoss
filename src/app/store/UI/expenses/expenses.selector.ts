@@ -78,16 +78,37 @@ export const debtCalc = createSelector(paidByUser, (state: any) => {
   state.map((x) => {
     if (x.amount > sharePerUser) {
       res.push({
-        user: x.paidBy,
+        paidBy: x.paidBy,
         oves: false,
-        amount: x.amount - sharePerUser,
+        ovedAmount: x.amount - sharePerUser,
       });
     } else if (x.amount < sharePerUser) {
-      res.push({ user: x.paidBy, oves: true, amount: sharePerUser - x.amount });
+      res.push({
+        paidBy: x.paidBy,
+        oves: true,
+        ovedAmount: sharePerUser - x.amount,
+      });
     } else {
-      res.push({ user: x.paidBy, oves: false, amount: 0 });
+      res.push({ paidBy: x.paidBy, oves: false, ovedAmount: 0 });
     }
   });
 
   return res;
 });
+
+export const userPaidDebt = createSelector(
+  paidByUser,
+  debtCalc,
+  (pUsr: any, dCals: any) => {
+    console.log('pUsr', pUsr);
+    console.log('dCals', dCals);
+
+    const mergeByPayer = (a, b) =>
+      a.map((itm) => ({
+        ...b.find((item) => item.paidBy === itm.paidBy && item),
+        ...itm,
+      }));
+    console.log('mm', mergeByPayer(pUsr, dCals));
+    return mergeByPayer(pUsr, dCals);
+  }
+);
