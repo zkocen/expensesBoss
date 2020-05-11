@@ -1,6 +1,13 @@
 <app-date-picker></app-date-picker>
 
-<!-- {{selectedMonth$  | async | json}} -->
+<ng-container *ngFor="let usr of paidByUser$ | async">
+  <mat-card>
+    <p>Name: {{ usr.paidBy }}</p>
+    <p>Paid: {{ usr.amount }}</p>
+    <p>{{ usr.name }}</p>
+  </mat-card>
+</ng-container>
+<br />
 <ng-container *ngIf="selectedMonth$ | async; let cm">
   <h3>{{ cm.currentMonth }}</h3>
   <ng-container *ngFor="let expense of cm.expenses">
@@ -11,5 +18,3 @@
     </mat-card>
   </ng-container>
 </ng-container>
-paidByUser$:
-{{paidByUser$ | async | json}}
