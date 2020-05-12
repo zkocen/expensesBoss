@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
+import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 import { ExpensesService } from 'src/app/services/expenses.service';
 import * as ExpensesActions from './expense.actions';
+import { Expense } from './expenses.state';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class ExpensesEffect {
@@ -39,11 +41,27 @@ export class ExpensesEffect {
           }),
           catchError(() =>
             catchError(() =>
-              of({ type: '[Expenses API] Expenses Loaded Error' })
+              of({ type: '[Expenses API]loading current month error' })
             )
           )
         )
       )
+    )
+  );
+
+  public putNewExpense: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExpensesActions.newExpense),
+      exhaustMap((action) => {
+        return this.expensesService.putExpense(action.expenses).pipe(
+          map((expense: Expense) => {
+            return ExpensesActions.loadExpensesSuccess({ expenses: expense });
+          }),
+          catchError(() =>
+            of({ type: '[Expenses API] adding new expense error' })
+          )
+        );
+      })
     )
   );
 

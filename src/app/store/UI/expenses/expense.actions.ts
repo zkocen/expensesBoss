@@ -26,3 +26,8 @@ export const newExpense = createAction(
   '[Expenses Action] put new expense',
   props<{ expenses: Expense }>()
 );
+
+export const newExpenseAdded = createAction(
+  '[Expenses Action] new expense successfully added',
+  props<{ expenses: Expense }>()
+);
