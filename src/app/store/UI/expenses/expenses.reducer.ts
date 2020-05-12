@@ -48,6 +48,13 @@ export const expensesReducer = createReducer(
       ...state,
       currentMonth,
     })
+  ),
+  on(
+    ExpensesActions.newExpense,
+    (state, { expenses }): ExpensesState => ({
+      ...state,
+      expenses: [...state.expenses, expenses],
+    })
   )
 );
 

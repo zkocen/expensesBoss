@@ -111,3 +111,8 @@ export const userPaidDebt = createSelector(
     return mergeByPayer(pUsr, dCals);
   }
 );
+
+export const idLastExpense = createSelector(
+  allExpenses,
+  (state: Expense[]) => state.slice(-1).pop().id
+);

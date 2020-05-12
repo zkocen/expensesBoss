@@ -9,3 +9,12 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
+export const ExpenseType = [
+  'groseries',
+  'utility',
+  'lesure',
+  'alcohol',
+  'sport',
+  'flat',
+];

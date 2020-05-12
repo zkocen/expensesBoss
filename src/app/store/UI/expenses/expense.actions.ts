@@ -21,3 +21,8 @@ export const loadExpensesSuccess = createAction(
   '[Expenses Action] Load Expenses Success',
   props<{ expenses: Expense }>()
 );
+
+export const newExpense = createAction(
+  '[Expenses Action] put new expense',
+  props<{ expenses: Expense }>()
+);
