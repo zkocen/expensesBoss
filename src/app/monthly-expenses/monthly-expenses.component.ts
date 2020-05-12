@@ -3,11 +3,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import {
   selectedMonth,
-  paidByUser,
-  debtCalc,
   userPaidDebt,
 } from '../store/UI/expenses/expenses.selector';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-monthly-expenses',

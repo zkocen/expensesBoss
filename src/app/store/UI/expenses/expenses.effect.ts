@@ -27,6 +27,26 @@ export class ExpensesEffect {
     )
   );
 
+  public loadCurrentMonth$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExpensesActions.loadCurrentMonth),
+      mergeMap(() =>
+        this.expensesService.getCurrentMonth().pipe(
+          map((month) => {
+            return ExpensesActions.loadCurrentMonthSuccess({
+              currentMonth: month,
+            });
+          }),
+          catchError(() =>
+            catchError(() =>
+              of({ type: '[Expenses API] Expenses Loaded Error' })
+            )
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private expensesService: ExpensesService

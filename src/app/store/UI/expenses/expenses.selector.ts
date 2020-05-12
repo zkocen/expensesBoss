@@ -33,6 +33,9 @@ export const selectedMonth = createSelector(
   (exState: ExpensesState, exPm: any) => {
     let res = [];
 
+    console.log('exPm', exPm);
+    console.log('exState', exState);
+
     exPm.map((m) => {
       if (m[0] === exState.currentMonth[0]) {
         res = m[1];
@@ -100,15 +103,12 @@ export const userPaidDebt = createSelector(
   paidByUser,
   debtCalc,
   (pUsr: any, dCals: any) => {
-    console.log('pUsr', pUsr);
-    console.log('dCals', dCals);
-
     const mergeByPayer = (a, b) =>
       a.map((itm) => ({
         ...b.find((item) => item.paidBy === itm.paidBy && item),
         ...itm,
       }));
-    console.log('mm', mergeByPayer(pUsr, dCals));
+
     return mergeByPayer(pUsr, dCals);
   }
 );

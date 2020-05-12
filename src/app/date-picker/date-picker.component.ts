@@ -17,8 +17,12 @@ import { AppState } from '../store/app.state';
 import {
   setCurrentMonth,
   loadExpenses,
+  loadCurrentMonth,
 } from '../store/UI/expenses/expense.actions';
 import { MY_FORMATS } from '../shared/formats';
+import { ExpensesEffect } from '../store/UI/expenses/expenses.effect';
+import { map } from 'rxjs/operators';
+import { ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-date-picker',
@@ -40,11 +44,7 @@ export class DatePickerComponent implements OnInit {
 
   public ngOnInit() {
     this.store.dispatch(loadExpenses());
-    this.store.dispatch(
-      setCurrentMonth({
-        currentMonth: [this.date.value.format(MY_FORMATS.parse.dateInput)],
-      })
-    );
+    this.store.dispatch(loadCurrentMonth());
   }
 
   chosenMonthHandler(selectedM: Moment, datepicker: MatDatepicker<Moment>) {

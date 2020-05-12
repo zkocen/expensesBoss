@@ -22,11 +22,19 @@ export const expensesInitialState: ExpensesState = {
 
 export const expensesReducer = createReducer(
   expensesInitialState,
-  on(ExpensesActions.loadExpenses, (state) => ({ ...state })),
-  on(ExpensesActions.loadExpensesSuccess, (state, data): any => {
-    return { currentMonth: [state.currentMonth], expenses: data.expenses };
-  }),
   on(ExpensesActions.setCurrentMonth, (state, { currentMonth }) => ({
+    ...state,
+    currentMonth,
+  })),
+  on(ExpensesActions.loadExpenses, (state) => ({ ...state })),
+  on(ExpensesActions.loadCurrentMonth, (state) => ({ ...state })),
+  on(ExpensesActions.loadExpensesSuccess, (state, data): any => {
+    return {
+      ...state,
+      expenses: data.expenses,
+    };
+  }),
+  on(ExpensesActions.loadCurrentMonthSuccess, (state, { currentMonth }) => ({
     ...state,
     currentMonth,
   }))

@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { baseUrl } from './shared/baseUrl';
 import { MonthlyExpensesComponent } from './monthly-expenses/monthly-expenses.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -28,7 +28,8 @@ import { ExpensesEffect } from './store/UI/expenses/expenses.effect';
 import { ExpensesDashboardComponent } from './expenses-dashboard/expenses-dashboard.component';
 import { AllExpensesComponent } from './all-expenses/all-expenses.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment'; // Angular CLI environment
+import { environment } from '../environments/environment';
+import { NewExpenseComponent } from './new-expense/new-expense.component'; // Angular CLI environment
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
     ExpenseComponent,
     ExpensesDashboardComponent,
     AllExpensesComponent,
+    NewExpenseComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    FormsModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
