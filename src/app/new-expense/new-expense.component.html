@@ -1,22 +1,28 @@
 <h2>Add Expense</h2>
-<form class="example-form">
+<form novalidate [formGroup]="newExpenseForm" #neform (ngSubmit)="onSubmit()">
   <!-- name -->
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="e.g. Netflix" type="text" required>
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="e.g. Netflix" type="text" required>
   </mat-form-field>
   <br />
   <!-- amount -->
   <mat-form-field>
-    <input matInput placeholder="20" type="number" required>
-  </mat-form-field>
-  <br />
-  <!-- paidBy -->
-  <mat-form-field>
-    <input matInput placeholder="Sanja" type="text" required>
+    <input matInput formControlName="amount" placeholder="20" type="number" required>
   </mat-form-field>
   <br />
 
+  <mat-radio-group formControlName="paidBy" aria-label="Paid by">
+    <mat-radio-button value="Sanja">Sanja</mat-radio-button>
+    <mat-radio-button value="Zan">Zan</mat-radio-button>
+  </mat-radio-group>
+
+  <br />
+
   <mat-form-field>
-    <input matInput placeholder="Month" type="month" required>
+    <input matInput formControlName="month" placeholder="Month" type="month" required>
   </mat-form-field>
+
+  <button mat-button type="submit">
+    Submit
+  </button>
 </form>

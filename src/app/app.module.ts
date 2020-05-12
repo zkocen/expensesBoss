@@ -19,6 +19,8 @@ import {
   MatInputModule,
   MatCardModule,
   MatButtonModule,
+  MatSelectModule,
+  MatRadioModule,
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
@@ -30,6 +32,7 @@ import { AllExpensesComponent } from './all-expenses/all-expenses.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { NewExpenseComponent } from './new-expense/new-expense.component'; // Angular CLI environment
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,9 +47,11 @@ import { NewExpenseComponent } from './new-expense/new-expense.component'; // An
     NewExpenseComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatDatepickerModule,
@@ -55,7 +60,8 @@ import { NewExpenseComponent } from './new-expense/new-expense.component'; // An
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    FormsModule,
+    MatSelectModule,
+    MatRadioModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,

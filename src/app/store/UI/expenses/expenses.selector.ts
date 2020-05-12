@@ -30,12 +30,8 @@ export const expensesPerMonth = createSelector(
 export const selectedMonth = createSelector(
   ExState,
   expensesPerMonth,
-  (exState: ExpensesState, exPm: any) => {
+  (exState: ExpensesState, exPm: [string, Expense[]][]) => {
     let res = [];
-
-    console.log('exPm', exPm);
-    console.log('exState', exState);
-
     exPm.map((m) => {
       if (m[0] === exState.currentMonth[0]) {
         res = m[1];
@@ -46,34 +42,37 @@ export const selectedMonth = createSelector(
   }
 );
 
-export const paidByUser = createSelector(selectedMonth, (state: any) => {
-  let result = [];
+export const paidByUser = createSelector(
+  selectedMonth,
+  (state: ExpensesState) => {
+    let result = [];
 
-  if (state.expenses.length > 0) {
-    result = [
-      ...state.expenses
-        .reduce((r, o) => {
-          const key = o.paidBy;
+    if (state.expenses.length > 0) {
+      result = [
+        ...state.expenses
+          .reduce((r, o) => {
+            const key = o.paidBy;
 
-          const item =
-            r.get(key) ||
-            Object.assign({}, o, {
-              name: '',
-              amount: 0,
-            });
+            const item =
+              r.get(key) ||
+              Object.assign({}, o, {
+                name: '',
+                amount: 0,
+              });
 
-          item.name += ' ' + o.name;
-          item.amount += o.amount;
-          return r.set(key, item);
-        }, new Map())
-        .values(),
-    ];
+            item.name += ' ' + o.name;
+            item.amount += o.amount;
+            return r.set(key, item);
+          }, new Map())
+          .values(),
+      ];
+    }
+
+    return result;
   }
+);
 
-  return result;
-});
-
-export const debtCalc = createSelector(paidByUser, (state: any) => {
+export const debtCalc = createSelector(paidByUser, (state: Expense[]) => {
   const total = state.reduce((a, b) => a + b.amount, 0);
   const sharePerUser = total / state.length;
   const res = [];
@@ -102,7 +101,7 @@ export const debtCalc = createSelector(paidByUser, (state: any) => {
 export const userPaidDebt = createSelector(
   paidByUser,
   debtCalc,
-  (pUsr: any, dCals: any) => {
+  (pUsr: Expense[], dCals: Expense[]) => {
     const mergeByPayer = (a, b) =>
       a.map((itm) => ({
         ...b.find((item) => item.paidBy === itm.paidBy && item),
