@@ -30,15 +30,15 @@ export const expensesPerMonth = createSelector(
 export const selectedMonth = createSelector(
   exState,
   expensesPerMonth,
-  (exState: ExpensesState, exPm: [string, Expense[]][]) => {
+  (expensesState: ExpensesState, exPm: [string, Expense[]][]) => {
     let res = [];
     exPm.map((m) => {
-      if (m[0] === exState.currentMonth[0]) {
+      if (m[0] === expensesState.currentMonth[0]) {
         res = m[1];
       }
     });
 
-    return { currentMonth: [exState.currentMonth[0]], expenses: res };
+    return { currentMonth: [expensesState.currentMonth[0]], expenses: res };
   }
 );
 
@@ -46,7 +46,6 @@ export const paidByUser = createSelector(
   selectedMonth,
   (state: ExpensesState) => {
     let result = [];
-
     if (state.expenses.length > 0) {
       result = [
         ...state.expenses

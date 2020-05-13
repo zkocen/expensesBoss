@@ -5,12 +5,14 @@ import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { idLastExpense } from '../store/UI/expenses/expenses.selector';
 import { newExpense } from '../store/UI/expenses/expense.actions';
-import { ExpenseType } from '../shared/formats';
+import { ExpenseType, MY_FORMATS } from '../shared/formats';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-expense',
   templateUrl: './new-expense.component.html',
   styleUrls: ['./new-expense.component.scss'],
+  providers: [DatePipe],
 })
 export class NewExpenseComponent implements OnInit {
   public newExpenseForm: FormGroup;
@@ -20,7 +22,11 @@ export class NewExpenseComponent implements OnInit {
 
   @ViewChild('neform', { static: true }) public newExpenseFormDirective;
 
-  constructor(public fb: FormBuilder, public store: Store<AppState>) {}
+  constructor(
+    private datePipe: DatePipe,
+    public fb: FormBuilder,
+    public store: Store<AppState>
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -42,6 +48,10 @@ export class NewExpenseComponent implements OnInit {
 
   public onSubmit() {
     this.newExpenseForm.value.dateEntered = new Date().toISOString();
+    this.newExpenseForm.value.month = this.datePipe.transform(
+      this.newExpenseForm.value.month,
+      MY_FORMATS.parse.dateInputPiped
+    );
     this.newExpenseForm.value.id = ++this.lastId;
     this.newExpense = this.newExpenseForm.value;
 

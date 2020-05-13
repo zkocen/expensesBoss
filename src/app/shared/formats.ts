@@ -1,6 +1,7 @@
 export const MY_FORMATS = {
   parse: {
     dateInput: 'MM/YYYY',
+    dateInputPiped: 'MM/yyyy',
   },
   display: {
     dateInput: 'MMMM - YYYY',

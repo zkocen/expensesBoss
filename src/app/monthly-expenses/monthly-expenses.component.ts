@@ -4,6 +4,7 @@ import { AppState } from '../store/app.state';
 import {
   selectedMonth,
   userPaidDebt,
+  expensesPerMonth,
 } from '../store/UI/expenses/expenses.selector';
 
 @Component({
