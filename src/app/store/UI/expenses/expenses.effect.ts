@@ -52,10 +52,10 @@ export class ExpensesEffect {
   public putNewExpense: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(ExpensesActions.newExpense),
-      exhaustMap((action) => {
+      mergeMap((action) => {
         return this.expensesService.putExpense(action.expenses).pipe(
           map((expense: Expense) => {
-            return ExpensesActions.loadExpensesSuccess({ expenses: expense });
+            return ExpensesActions.newExpenseAdded({ expenses: expense });
           }),
           catchError(() =>
             of({ type: '[Expenses API] adding new expense error' })

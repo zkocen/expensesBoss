@@ -3,9 +3,9 @@ import { ExpensesState, Expense } from './expenses.state';
 import { createSelector } from '@ngrx/store';
 import { groupBy } from 'lodash';
 
-export const ExState = (state: AppState) => state.uiExpenses;
+export const exState = (state: AppState) => state.uiExpenses;
 
-export const allExpenses = createSelector(ExState, (state: ExpensesState) => {
+export const allExpenses = createSelector(exState, (state: ExpensesState) => {
   return state.expenses;
 });
 
@@ -28,7 +28,7 @@ export const expensesPerMonth = createSelector(
 );
 
 export const selectedMonth = createSelector(
-  ExState,
+  exState,
   expensesPerMonth,
   (exState: ExpensesState, exPm: [string, Expense[]][]) => {
     let res = [];

@@ -4,7 +4,6 @@ import { Expense } from '../store/UI/expenses/expenses.state';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { idLastExpense } from '../store/UI/expenses/expenses.selector';
-import { last } from 'rxjs/operators';
 import { newExpense } from '../store/UI/expenses/expense.actions';
 import { ExpenseType } from '../shared/formats';
 
