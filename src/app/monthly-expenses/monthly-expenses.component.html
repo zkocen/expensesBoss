@@ -1,26 +1,46 @@
 <app-date-picker></app-date-picker>
 
-<ng-container *ngFor="let user of userPaidDebt$ | async">
+<ng-container *ngFor="let user of userPaidDebt$ | async;trackBy: trackByIndex">
   <mat-card>
-    <p>Name: {{ user.paidBy }}</p>
-    <p>Paid: {{ user.amount }}</p>
-    <ng-container *ngIf="user.oves">
-      <p>Needs to pay {{user.ovedAmount}}</p>
-    </ng-container>
-    <ng-container *ngIf="user.oves === false">
-      <p>Will get {{user.ovedAmount}}</p>
-    </ng-container>
-    <p>Purchases: {{ user.name }}</p>
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          Name: {{ user.paidBy }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Paid: {{ user.amount }}
+        </mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="user.oves">
+        <p>Needs to pay {{user.ovedAmount}}</p>
+      </ng-container>
+      <ng-container *ngIf="user.oves === false">
+        <p>Will get {{user.ovedAmount}}</p>
+      </ng-container>
+      <p>Purchases: {{ user.name }}</p>
+    </mat-card-content>
   </mat-card>
 </ng-container>
 <br />
 <ng-container *ngIf="selectedMonth$ | async; let cm">
   <h3>{{ cm.currentMonth }}</h3>
-  <ng-container *ngFor="let expense of cm.expenses">
-    <mat-card>
-      <p>Name: {{ expense.name }}</p>
-      <p>Amount: {{ expense.amount }}</p>
-      <p>Paid: {{ expense.paidBy }}</p>
+  <ng-container *ngFor="let expense of cm.expenses;let i = index;">
+    <mat-card (mouseover)="over(i)" (mouseleave)="showDetails = false">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>
+            Name: {{ expense.name  }}
+          </mat-card-title>
+        </mat-card-title-group>
+        <fa-icon *ngIf="showDetails && i === showDetailsId" class="push-right close-icon" [icon]="faTimes">
+        </fa-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Amount: {{ expense.amount }}</p>
+        <p>Paid: {{ expense.paidBy }}</p>
+      </mat-card-content>
     </mat-card>
   </ng-container>
 </ng-container>

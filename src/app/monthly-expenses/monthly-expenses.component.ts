@@ -4,8 +4,8 @@ import { AppState } from '../store/app.state';
 import {
   selectedMonth,
   userPaidDebt,
-  expensesPerMonth,
 } from '../store/UI/expenses/expenses.selector';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-monthly-expenses',
@@ -17,7 +17,20 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
 
   public selectedMonth$ = this.store.select(selectedMonth);
   public userPaidDebt$ = this.store.select(userPaidDebt);
+
+  public faTimes = faTimes;
+  public showDetails = false;
+  public showDetailsId: number;
   ngOnChanges() {}
+
+  public over(index) {
+    this.showDetails = true;
+    this.showDetailsId = index;
+  }
+
+  public trackByIndex(indx: number, _: any) {
+    return indx;
+  }
 
   ngOnInit() {}
 }
