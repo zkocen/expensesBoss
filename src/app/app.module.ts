@@ -21,6 +21,7 @@ import {
   MatButtonModule,
   MatSelectModule,
   MatRadioModule,
+  MatCheckboxModule,
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
@@ -62,6 +63,7 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatSelectModule,
     MatRadioModule,
+    MatCheckboxModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,

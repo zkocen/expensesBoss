@@ -6,22 +6,36 @@
   <mat-form-field>
     <input matInput formControlName="name" placeholder="e.g. Netflix" type="text" required>
   </mat-form-field>
+  <mat-error *ngIf="formErrors.name">
+    {{formErrors.name}}
+  </mat-error>
   <br />
 
   <mat-form-field>
     <input matInput formControlName="amount" placeholder="20" type="number" required>
   </mat-form-field>
+  <mat-error *ngIf="formErrors.amount">
+    {{formErrors.amount}}
+  </mat-error>
   <br />
 
   <mat-radio-group formControlName="paidBy" aria-label="Paid by">
     <mat-radio-button value="Sanja">Sanja</mat-radio-button>
     <mat-radio-button value="Zan">Zan</mat-radio-button>
   </mat-radio-group>
+  <mat-error *ngIf="formErrors.paidBy">
+    {{formErrors.paidBy}}
+  </mat-error>
 
+  <br />
+  <mat-checkbox formControlName="recurring">recurring?</mat-checkbox>
   <br />
 
   <mat-form-field>
     <input matInput formControlName="month" placeholder="Month" type="month" required>
+    <mat-error *ngIf="formErrors.paidBy">
+      {{formErrors.month}}
+    </mat-error>
   </mat-form-field>
 
   <mat-select placeholder="Type?" formControlName="category">
@@ -30,7 +44,7 @@
     </mat-option>
   </mat-select>
 
-  <button mat-button type="submit">
+  <button [disabled]="!newExpenseForm.valid" mat-button type="submit">
     Submit
   </button>
 </form>
