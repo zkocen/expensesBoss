@@ -26,7 +26,7 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
 import { ExpenseComponent } from './expense/expense.component';
-import { USER_PROVIDED_EFFECTS, EffectsModule } from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 import { ExpensesEffect } from './store/UI/expenses/expenses.effect';
 import { ExpensesDashboardComponent } from './expenses-dashboard/expenses-dashboard.component';
 import { AllExpensesComponent } from './all-expenses/all-expenses.component';
@@ -34,6 +34,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { NewExpenseComponent } from './new-expense/new-expense.component'; // Angular CLI environment
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +65,7 @@ import { CommonModule } from '@angular/common';
     MatSelectModule,
     MatRadioModule,
     MatCheckboxModule,
+    FontAwesomeModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,

@@ -1,12 +1,24 @@
   <button mat-raised-button (click)=toggle()>All Expenses Ever</button>
   <ng-container *ngIf="show">
     <h3>All Expenses</h3>
-    <ng-container *ngFor="let expense of expensesList$ | async">
-      <mat-card>
-        <h4>Month: {{ expense.month }}</h4>
-        <p>Name: {{ expense.name }}</p>
-        <p>Amount: {{ expense.amount }}</p>
-        <p>Paid: {{ expense.paidBy }}</p>
+    <ng-container *ngFor="let expense of expensesList$ | async;let i = index;trackBy: trackByIndex">
+      <mat-card (mouseover)="over(i)" (mouseleave)="showDetails = false">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>
+              Name: {{ expense.name }}
+            </mat-card-title>
+            <mat-card-subtitle>
+              Month: {{ expense.month }}
+            </mat-card-subtitle>
+          </mat-card-title-group>
+          <fa-icon *ngIf="showDetails && i === showDetailsId" class="push-right close-icon" [icon]="faTimes">
+          </fa-icon>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Amount: {{ expense.amount }}</p>
+          <p>Paid: {{ expense.paidBy }}</p>
+        </mat-card-content>
       </mat-card>
     </ng-container>
     <h4>Overall total: {{ expensesTotalOverall$ | async }}</h4>
