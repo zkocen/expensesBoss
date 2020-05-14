@@ -30,14 +30,13 @@ export class ExpenseComponent implements OnInit {
       ...expense,
       archived: true,
     };
-
     if (expense.id) {
       this.store.dispatch(archiveExpenseBegin({ expense: newExpense }));
     }
   }
 
-  public trackByIndex(indx: number, _: any) {
-    return indx;
+  public trackByIndex(indx: number, expense: Expense) {
+    return expense.id;
   }
 
   ngOnInit() {}

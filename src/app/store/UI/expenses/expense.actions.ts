@@ -28,8 +28,7 @@ export const newExpense = createAction(
 );
 
 export const newExpenseAdded = createAction(
-  '[Expenses Action] new expense successfully added',
-  props<{ expenses: Expense }>()
+  '[Expenses Action] new expense successfully added'
 );
 
 export const archiveExpenseBegin = createAction(

@@ -1,12 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expense } from '../store/UI/expenses/expenses.state';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
-import { idLastExpense } from '../store/UI/expenses/expenses.selector';
-import { newExpense } from '../store/UI/expenses/expense.actions';
 import { ExpenseType, MY_FORMATS } from '../shared/formats';
 import { DatePipe } from '@angular/common';
+import { newExpense } from '../store/UI/expenses/expense.actions';
 
 @Component({
   selector: 'app-new-expense',
@@ -14,11 +20,11 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./new-expense.component.scss'],
   providers: [DatePipe],
 })
-export class NewExpenseComponent implements OnInit {
+export class NewExpenseComponent implements OnInit, OnChanges {
   public newExpenseForm: FormGroup;
   public newExpense: Expense;
-  public lastId: number;
   public category = ExpenseType;
+  @Input() public newId: number;
 
   @ViewChild('neform', { static: true }) public newExpenseFormDirective;
 
@@ -28,9 +34,14 @@ export class NewExpenseComponent implements OnInit {
     public store: Store<AppState>
   ) {}
 
-  ngOnInit() {
+  public ngOnChanges(changes: SimpleChanges) {
+    if (changes) {
+      this.newId = changes.newId.currentValue;
+    }
+  }
+
+  public ngOnInit() {
     this.createForm();
-    this.store.select(idLastExpense).subscribe((x) => (this.lastId = x));
   }
 
   public formErrors = {
@@ -63,7 +74,7 @@ export class NewExpenseComponent implements OnInit {
 
   public createForm() {
     this.newExpenseForm = this.fb.group({
-      id: ++this.lastId,
+      id: 0,
       name: [
         '',
         [
@@ -118,6 +129,7 @@ export class NewExpenseComponent implements OnInit {
       MY_FORMATS.parse.dateInputPiped
     );
     this.newExpense = this.newExpenseForm.value;
+    this.newExpenseForm.value.id = this.newId;
 
     this.store.dispatch(newExpense({ expenses: this.newExpense }));
 

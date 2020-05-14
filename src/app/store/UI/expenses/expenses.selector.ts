@@ -111,8 +111,6 @@ export const userPaidDebt = createSelector(
   }
 );
 
-export const idLastExpense = createSelector(allExpenses, (state: Expense[]) => {
-  if (state[state.length - 1]) {
-    return state[state.length - 1].id;
-  }
+export const idLastExpense = createSelector(exState, (state: ExpensesState) => {
+  return +state.expenses.length + 1;
 });

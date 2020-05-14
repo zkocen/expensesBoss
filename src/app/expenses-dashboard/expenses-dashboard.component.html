@@ -1,5 +1,5 @@
 <h2>Expenses Dashboard</h2>
-<app-new-expense></app-new-expense>
+<app-new-expense [newId]="newId$ | async"></app-new-expense>
 <br />
 <app-monthly-expenses></app-monthly-expenses>
 <br />

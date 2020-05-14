@@ -59,9 +59,9 @@ export const expensesReducer = createReducer(
   ),
   on(
     ExpensesActions.newExpenseAdded,
-    (state, { expenses }): ExpensesState => ({
+    (state): ExpensesState => ({
       ...state,
-      expenses: [...state.expenses, expenses],
+      expenses: [...state.expenses],
     })
   ),
   on(
@@ -78,9 +78,9 @@ export const expensesReducer = createReducer(
   ),
   on(
     ExpensesActions.archiveExpenseSuccess,
-    (state, { expense }): ExpensesState => ({
+    (state): ExpensesState => ({
       ...state,
-      expenses: [...state.expenses, expense],
+      expenses: [...state.expenses],
     })
   )
 );

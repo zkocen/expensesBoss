@@ -55,7 +55,7 @@ export class ExpensesEffect {
       mergeMap((action) => {
         return this.expensesService.putExpense(action.expenses).pipe(
           map((expense: Expense) => {
-            return ExpensesActions.newExpenseAdded({ expenses: expense });
+            return ExpensesActions.newExpenseAdded();
           }),
           catchError(() =>
             of({ type: '[Expenses API] adding new expense error' })
@@ -69,7 +69,6 @@ export class ExpensesEffect {
     this.actions$.pipe(
       ofType(ExpensesActions.archiveExpenseBegin),
       mergeMap((action) => {
-        console.log('effectaction', action);
         return this.expensesService.archiveExpense(action.expense).pipe(
           map((expense: Expense) => {
             return ExpensesActions.archiveExpenseSuccess({ expense });
