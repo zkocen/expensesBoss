@@ -34,7 +34,8 @@
             Name: {{ expense.name  }}
           </mat-card-title>
         </mat-card-title-group>
-        <fa-icon *ngIf="showDetails && i === showDetailsId" class="push-right close-icon" [icon]="faTimes">
+        <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId" class="push-right close-icon"
+          [icon]="faTimes">
         </fa-icon>
       </mat-card-header>
       <mat-card-content>
