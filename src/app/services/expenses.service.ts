@@ -39,4 +39,18 @@ export class ExpensesService {
 
     return this.http.post<Expense>(baseUrl + 'expenses', expense, httpOptions);
   }
+
+  public archiveExpense(expense: Expense): Observable<Expense> {
+    if (expense && expense.id !== undefined) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      };
+      return this.http
+        .put<Expense>(baseUrl + 'expenses/' + expense.id, expense, httpOptions)
+        .pipe(catchError(this.processHTTPMsgService.handleError));
+    }
+    console.log('error no expense to archive');
+  }
 }

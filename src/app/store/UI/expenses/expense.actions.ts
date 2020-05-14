@@ -31,3 +31,13 @@ export const newExpenseAdded = createAction(
   '[Expenses Action] new expense successfully added',
   props<{ expenses: Expense }>()
 );
+
+export const archiveExpenseBegin = createAction(
+  '[Expenses Action] new expense delete start',
+  props<{ expense: Expense }>()
+);
+
+export const archiveExpenseSuccess = createAction(
+  '[Expenses Action] new expense delete success',
+  props<{ expense: Expense }>()
+);

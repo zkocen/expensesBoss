@@ -16,6 +16,7 @@ export const expensesInitialState: ExpensesState = {
       name: '',
       amount: 0,
       paidBy: '',
+      archived: false,
     },
   ],
 };
@@ -61,6 +62,25 @@ export const expensesReducer = createReducer(
     (state, { expenses }): ExpensesState => ({
       ...state,
       expenses: [...state.expenses, expenses],
+    })
+  ),
+  on(
+    ExpensesActions.archiveExpenseBegin,
+    (state, { expense }): ExpensesState => ({
+      ...state,
+      expenses: state.expenses.map((e: Expense) => {
+        if (e.id === expense.id) {
+          return expense;
+        }
+        return e;
+      }),
+    })
+  ),
+  on(
+    ExpensesActions.archiveExpenseSuccess,
+    (state, { expense }): ExpensesState => ({
+      ...state,
+      expenses: [...state.expenses, expense],
     })
   )
 );

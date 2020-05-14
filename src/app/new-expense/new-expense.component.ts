@@ -78,6 +78,7 @@ export class NewExpenseComponent implements OnInit {
       dateEntered: '',
       recurring: false,
       category: ['', [Validators.required]],
+      archived: false,
     });
 
     this.newExpenseForm.valueChanges.subscribe((data) => {
@@ -129,6 +130,7 @@ export class NewExpenseComponent implements OnInit {
       dateEntered: '',
       recurring: false,
       category: 'groseries',
+      archived: false,
     });
   }
 }

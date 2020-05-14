@@ -6,7 +6,7 @@ import { groupBy } from 'lodash';
 export const exState = (state: AppState) => state.uiExpenses;
 
 export const allExpenses = createSelector(exState, (state: ExpensesState) => {
-  return state.expenses;
+  return state.expenses.filter((expense) => expense.archived === false);
 });
 
 export const expensesTotalOverall = createSelector(

@@ -12,4 +12,5 @@ export interface Expense {
   name: string;
   amount: number;
   paidBy: string;
+  archived: boolean;
 }

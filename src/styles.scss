@@ -60,3 +60,9 @@ fa-icon {
 .close-icon {
   cursor: pointer;
 }
+
+mat-card {
+  .mat-card-header-text {
+    margin: 0;
+  }
+}
