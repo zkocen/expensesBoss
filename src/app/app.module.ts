@@ -35,6 +35,7 @@ import { environment } from '../environments/environment';
 import { NewExpenseComponent } from './new-expense/new-expense.component'; // Angular CLI environment
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AllExpensesSingleComponent } from './all-expenses/all-expenses-single/all-expenses-single.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ExpensesDashboardComponent,
     AllExpensesComponent,
     NewExpenseComponent,
+    AllExpensesSingleComponent,
   ],
   imports: [
     CommonModule,

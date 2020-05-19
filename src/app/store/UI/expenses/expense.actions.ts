@@ -32,11 +32,11 @@ export const newExpenseAdded = createAction(
 );
 
 export const archiveExpenseBegin = createAction(
-  '[Expenses Action] new expense delete start',
+  '[Expenses Action] new expense archive start',
   props<{ expense: Expense }>()
 );
 
 export const archiveExpenseSuccess = createAction(
-  '[Expenses Action] new expense delete success',
+  '[Expenses Action] new expense archive success',
   props<{ expense: Expense }>()
 );
