@@ -83,6 +83,7 @@ import { AllExpensesSingleComponent } from './all-expenses/all-expenses-single/a
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
   ],
+  entryComponents: [ExpenseComponent],
   providers: [
     { provide: 'baseUrl', useValue: baseUrl },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },

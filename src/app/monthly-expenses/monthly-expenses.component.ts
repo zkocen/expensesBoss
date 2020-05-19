@@ -8,6 +8,10 @@ import {
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Expense } from '../store/UI/expenses/expenses.state';
 import { editExpenseBegin } from '../store/UI/expenses/expense.actions';
+import { MatDialog } from '@angular/material';
+import * as moment from 'moment';
+import { MY_FORMATS } from '../shared/formats';
+import { ExpenseComponent } from '../expense/expense.component';
 
 @Component({
   selector: 'app-monthly-expenses',
@@ -15,7 +19,7 @@ import { editExpenseBegin } from '../store/UI/expenses/expense.actions';
   styleUrls: ['./monthly-expenses.component.scss'],
 })
 export class MonthlyExpensesComponent implements OnInit, OnChanges {
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, public dialog: MatDialog) {}
 
   public selectedMonth$ = this.store.select(selectedMonth);
   public userPaidDebt$ = this.store.select(userPaidDebt);
@@ -24,6 +28,24 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
   public showDetails = false;
   public showDetailsId: number;
   ngOnChanges() {}
+
+  public openDialog(expense: Expense) {
+    const dialogRef = this.dialog.open(ExpenseComponent, {
+      width: '250px',
+      data: { expense },
+    });
+
+    dialogRef.afterClosed().subscribe((result: Expense) => {
+      const resultCopy: Expense = result;
+      resultCopy.month = moment(
+        result.month,
+        MY_FORMATS.display.monthYearLabel
+      ).format(MY_FORMATS.parse.dateInput);
+      if (resultCopy.id) {
+        this.store.dispatch(editExpenseBegin({ expense: resultCopy }));
+      }
+    });
+  }
 
   public over(index) {
     this.showDetails = true;

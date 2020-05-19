@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Expense } from '../store/UI/expenses/expenses.state';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { MY_FORMATS } from '../shared/formats';
+import { MY_FORMATS, ExpenseType } from '../shared/formats';
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
@@ -11,6 +11,7 @@ import { MY_FORMATS } from '../shared/formats';
 })
 export class ExpenseComponent implements OnInit {
   public editExpenseForm: FormGroup;
+  public categories = ExpenseType;
 
   constructor(
     public dialogRef: MatDialogRef<ExpenseComponent>,

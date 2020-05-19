@@ -20,10 +20,6 @@ export const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'expense',
-    component: ExpenseComponent,
-  },
-  {
     path: '**',
     redirectTo: '',
   },
