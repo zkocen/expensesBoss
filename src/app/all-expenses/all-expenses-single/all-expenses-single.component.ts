@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
-import { archiveExpenseBegin } from '../../store/UI/expenses/expense.actions';
+import { editExpenseBegin } from '../../store/UI/expenses/expense.actions';
 import { Expense } from '../../store/UI/expenses/expenses.state';
 import { MatDialog } from '@angular/material';
 import { ExpenseComponent } from 'src/app/expense/expense.component';
@@ -34,12 +34,11 @@ export class AllExpensesSingleComponent implements OnInit {
       archived: true,
     };
     if (expense.id) {
-      this.store.dispatch(archiveExpenseBegin({ expense: newExpense }));
+      this.store.dispatch(editExpenseBegin({ expense: newExpense }));
     }
   }
 
   public openDialog(expense: Expense) {
-    console.log('ex', expense);
     const dialogRef = this.dialog.open(ExpenseComponent, {
       width: '250px',
       data: { expense },
@@ -53,7 +52,7 @@ export class AllExpensesSingleComponent implements OnInit {
       ).format(MY_FORMATS.parse.dateInput);
 
       if (resultCopy.id) {
-        this.store.dispatch(archiveExpenseBegin({ expense: resultCopy }));
+        this.store.dispatch(editExpenseBegin({ expense: resultCopy }));
       }
     });
   }

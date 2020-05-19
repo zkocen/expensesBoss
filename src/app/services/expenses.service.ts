@@ -6,7 +6,6 @@ import { baseUrl } from '../shared/baseUrl';
 import { catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { AuthenticationService } from './authentication.service';
-import { archiveExpenseBegin } from '../store/UI/expenses/expense.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +30,6 @@ export class ExpensesService {
   }
 
   public putExpense(expense: Expense): Observable<Expense> {
-    const authToken = this.as.currentUserValue;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -41,7 +39,7 @@ export class ExpensesService {
     return this.http.post<Expense>(baseUrl + 'expenses', expense, httpOptions);
   }
 
-  public archiveExpense(expense: Expense): Observable<Expense> {
+  public editExpense(expense: Expense): Observable<Expense> {
     if (expense && expense.id !== undefined) {
       const httpOptions = {
         headers: new HttpHeaders({

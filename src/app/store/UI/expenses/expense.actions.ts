@@ -31,12 +31,12 @@ export const newExpenseAdded = createAction(
   '[Expenses Action] new expense successfully added'
 );
 
-export const archiveExpenseBegin = createAction(
-  '[Expenses Action] new expense archive start',
+export const editExpenseBegin = createAction(
+  '[Expenses Action] new expense edit start',
   props<{ expense: Expense }>()
 );
 
-export const archiveExpenseSuccess = createAction(
-  '[Expenses Action] new expense archive success',
+export const editExpenseSuccess = createAction(
+  '[Expenses Action] new expense edit success',
   props<{ expense: Expense }>()
 );

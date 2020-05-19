@@ -44,7 +44,6 @@ export class ExpenseComponent implements OnInit {
       category: [this.data.expense.category, [Validators.required]],
       archived: this.data.expense.archived,
     });
-    console.log('form', this.editExpenseForm.value);
   }
 
   ngOnInit() {

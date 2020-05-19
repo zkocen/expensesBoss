@@ -65,7 +65,7 @@ export const expensesReducer = createReducer(
     })
   ),
   on(
-    ExpensesActions.archiveExpenseBegin,
+    ExpensesActions.editExpenseBegin,
     (state, { expense }): ExpensesState => ({
       ...state,
       expenses: state.expenses.map((e: Expense) => {
@@ -77,7 +77,7 @@ export const expensesReducer = createReducer(
     })
   ),
   on(
-    ExpensesActions.archiveExpenseSuccess,
+    ExpensesActions.editExpenseSuccess,
     (state): ExpensesState => ({
       ...state,
       expenses: [...state.expenses],

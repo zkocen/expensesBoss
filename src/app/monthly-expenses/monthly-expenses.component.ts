@@ -7,7 +7,7 @@ import {
 } from '../store/UI/expenses/expenses.selector';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Expense } from '../store/UI/expenses/expenses.state';
-import { archiveExpenseBegin } from '../store/UI/expenses/expense.actions';
+import { editExpenseBegin } from '../store/UI/expenses/expense.actions';
 
 @Component({
   selector: 'app-monthly-expenses',
@@ -41,7 +41,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
       archived: true,
     };
     if (expense.id) {
-      this.store.dispatch(archiveExpenseBegin({ expense: newExpense }));
+      this.store.dispatch(editExpenseBegin({ expense: newExpense }));
     }
   }
 

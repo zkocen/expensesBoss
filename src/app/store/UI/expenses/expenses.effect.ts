@@ -67,11 +67,11 @@ export class ExpensesEffect {
 
   public archiveNewExpense: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(ExpensesActions.archiveExpenseBegin),
+      ofType(ExpensesActions.editExpenseBegin),
       mergeMap((action) => {
-        return this.expensesService.archiveExpense(action.expense).pipe(
+        return this.expensesService.editExpense(action.expense).pipe(
           map((expense: Expense) => {
-            return ExpensesActions.archiveExpenseSuccess({ expense });
+            return ExpensesActions.editExpenseSuccess({ expense });
           }),
           catchError(() =>
             of({ type: '[Expenses API] archiving new expense error' })
