@@ -19,6 +19,57 @@ export class ExpenseComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { expense: Expense }
   ) {}
 
+  public formErrors = {
+    amount: '',
+    month: '',
+    name: '',
+    paidBy: '',
+  };
+
+  public validationMessages = {
+    amount: {
+      required: 'Amount is required',
+      min: 'Amount must be more than 1 pound',
+    },
+    name: {
+      required: 'Name of purchase is required',
+      minlength: 'Name of purchase must be at least 2 characters long',
+      maxlength: 'Name of purchase must not be longer than 25 characters',
+    },
+    paidBy: {
+      required: 'Who paid must be selected',
+    },
+    month: {
+      required: 'Month must be selected',
+    },
+    category: {
+      required: 'Category must be selected',
+    },
+  };
+
+  public onValueChanged(data?: any) {
+    if (!this.editExpenseForm) {
+      return;
+    }
+
+    const form = this.editExpenseForm;
+    for (const field in this.formErrors) {
+      if (this.formErrors.hasOwnProperty(field)) {
+        //clear previous error msg (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.formErrors[field] += messages[key] + '';
+            }
+          }
+        }
+      }
+    }
+  }
+
   public createForm() {
     const monthMom = moment(
       this.data.expense.month,
@@ -45,6 +96,12 @@ export class ExpenseComponent implements OnInit {
       category: [this.data.expense.category, [Validators.required]],
       archived: this.data.expense.archived,
     });
+
+    this.editExpenseForm.valueChanges.subscribe((data) => {
+      this.onValueChanged(data);
+    });
+
+    this.onValueChanged();
   }
 
   ngOnInit() {

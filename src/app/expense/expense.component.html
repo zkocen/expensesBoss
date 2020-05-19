@@ -2,31 +2,29 @@
 <!-- {{data | json}} -->
 <form novalidate [formGroup]="editExpenseForm">
 
-  <!-- <input formControlName="id" type="hidden" required> -->
-
   <mat-form-field>
     <input matInput formControlName="name" placeholder="e.g. Netflix" type="text" required>
   </mat-form-field>
-  <!-- <mat-error *ngIf="formErrors.name">
+  <mat-error *ngIf="formErrors.name">
     {{formErrors.name}}
-  </mat-error> -->
+  </mat-error>
   <br />
 
   <mat-form-field>
     <input matInput formControlName="amount" placeholder="20" type="number" required>
   </mat-form-field>
-  <!-- <mat-error *ngIf="formErrors.amount">
+  <mat-error *ngIf="formErrors.amount">
     {{formErrors.amount}}
-  </mat-error> -->
+  </mat-error>
   <br />
 
   <mat-radio-group formControlName="paidBy" aria-label="Paid by">
     <mat-radio-button value="Sanja">Sanja</mat-radio-button>
     <mat-radio-button value="Zan">Zan</mat-radio-button>
   </mat-radio-group>
-  <!-- <mat-error *ngIf="formErrors.paidBy">
+  <mat-error *ngIf="formErrors.paidBy">
     {{formErrors.paidBy}}
-  </mat-error> -->
+  </mat-error>
 
   <br />
   <mat-checkbox formControlName="recurring">recurring?</mat-checkbox>
@@ -34,9 +32,9 @@
 
   <mat-form-field>
     <input matInput formControlName="month" placeholder="Month" type="month" required>
-    <!-- <mat-error *ngIf="formErrors.paidBy">
+    <mat-error *ngIf="formErrors.paidBy">
       {{formErrors.month}}
-    </mat-error> -->
+    </mat-error>
   </mat-form-field>
 
   <mat-select placeholder="Type?" formControlName="category">
@@ -48,5 +46,5 @@
 
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="editExpenseForm.value">Close</button>
+  <button mat-button [disabled]="!editExpenseForm.valid" [mat-dialog-close]="editExpenseForm.value">Close</button>
 </div>
