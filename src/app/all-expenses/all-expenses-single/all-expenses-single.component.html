@@ -1,5 +1,5 @@
   <ng-container *ngFor="let expense of expensesList;let i = index;trackBy: trackByIndex">
-    <mat-card (mouseover)="over(i)" (mouseleave)="showDetails = false">
+    <mat-card (click)="openDialog(expense)" (mouseover)=" over(i)" (mouseleave)="showDetails = false">
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title>

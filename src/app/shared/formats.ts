@@ -5,7 +5,7 @@ export const MY_FORMATS = {
   },
   display: {
     dateInput: 'MMMM - YYYY',
-    monthYearLabel: 'MMM YYYY',
+    monthYearLabel: 'YYYY-MM',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
   },

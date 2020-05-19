@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { archiveExpenseBegin } from '../../store/UI/expenses/expense.actions';
 import { Expense } from '../../store/UI/expenses/expenses.state';
+import { MatDialog } from '@angular/material';
+import { ExpenseComponent } from 'src/app/expense/expense.component';
 
 @Component({
   selector: 'app-all-expenses-single',
@@ -17,7 +19,7 @@ export class AllExpensesSingleComponent implements OnInit {
   public showDetails = false;
   public showDetailsId: number;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, public dialog: MatDialog) {}
 
   public over(index) {
     this.showDetails = true;
@@ -33,6 +35,19 @@ export class AllExpensesSingleComponent implements OnInit {
     if (expense.id) {
       this.store.dispatch(archiveExpenseBegin({ expense: newExpense }));
     }
+  }
+
+  public openDialog(expense: Expense) {
+    console.log('ex', expense);
+    const dialogRef = this.dialog.open(ExpenseComponent, {
+      width: '250px',
+      data: { expense },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      console.log('result', result);
+    });
   }
 
   public trackByIndex(indx: number, expense: Expense) {

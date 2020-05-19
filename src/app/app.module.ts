@@ -22,6 +22,8 @@ import {
   MatSelectModule,
   MatRadioModule,
   MatCheckboxModule,
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
@@ -68,6 +70,7 @@ import { AllExpensesSingleComponent } from './all-expenses/all-expenses-single/a
     MatRadioModule,
     MatCheckboxModule,
     FontAwesomeModule,
+    MatDialogModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -80,7 +83,10 @@ import { AllExpensesSingleComponent } from './all-expenses/all-expenses-single/a
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
   ],
-  providers: [{ provide: 'baseUrl', useValue: baseUrl }],
+  providers: [
+    { provide: 'baseUrl', useValue: baseUrl },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
