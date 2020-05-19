@@ -6,7 +6,8 @@ import { archiveExpenseBegin } from '../../store/UI/expenses/expense.actions';
 import { Expense } from '../../store/UI/expenses/expenses.state';
 import { MatDialog } from '@angular/material';
 import { ExpenseComponent } from 'src/app/expense/expense.component';
-
+import { MY_FORMATS } from 'src/app/shared/formats';
+import * as moment from 'moment';
 @Component({
   selector: 'app-all-expenses-single',
   templateUrl: './all-expenses-single.component.html',
@@ -44,9 +45,16 @@ export class AllExpensesSingleComponent implements OnInit {
       data: { expense },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log('result', result);
+    dialogRef.afterClosed().subscribe((result: Expense) => {
+      const resultCopy: Expense = result;
+      resultCopy.month = moment(
+        result.month,
+        MY_FORMATS.display.monthYearLabel
+      ).format(MY_FORMATS.parse.dateInput);
+
+      if (resultCopy.id) {
+        this.store.dispatch(archiveExpenseBegin({ expense: resultCopy }));
+      }
     });
   }
 

@@ -19,8 +19,7 @@ export class ExpenseComponent implements OnInit {
   ) {}
 
   public createForm() {
-    console.log('ddd', this.data);
-    let monthMom = moment(
+    const monthMom = moment(
       this.data.expense.month,
       MY_FORMATS.parse.dateInput
     ).format(MY_FORMATS.display.monthYearLabel);
