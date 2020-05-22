@@ -88,7 +88,7 @@ app.post('/api/expenses', function (req, res) {
   if (!req.body.name) {
     handleError(res, 'Invalid expense input', 'Must provide a name.', 400);
   } else {
-    db.collection(CONTACTS_COLLECTION).insertOne(newContact, function (
+    db.collection(EXPENSES_COLLECTION).insertOne(newContact, function (
       err,
       doc
     ) {
@@ -100,3 +100,5 @@ app.post('/api/expenses', function (req, res) {
     });
   }
 });
+
+// curl -H "Content-Type: application/json" -d '{"id": 1,"name": "","amount": 0,"paidBy": "","month": "","dateEntered": "","recurring": false,"category": "groseries","archived": false}' https://limitless-shore-40407.herokuapp.com/api/expenses
