@@ -45,7 +45,7 @@ function handleError(res, reason, message, code) {
 
 /*  "/api/expenses"
  *    GET: finds all expenses
- *    POST: creates a new contact
+ *    POST: creates a new expense
  */
 
 app.get("/api/expenses", function (req, res) {
@@ -59,15 +59,15 @@ app.get("/api/expenses", function (req, res) {
 });
 
 app.post("/api/expenses", function (req, res) {
-  var newContact = req.body;
-  newContact.createDate = new Date();
+  var newExpense = req.body;
+  newExpense.createDate = new Date();
 
-  if (!req.body.name) {
-    handleError(res, "Invalid user input", "Must provide a name.", 400);
+  if (!req.body.id) {
+    handleError(res, "Invalid user input", "Must provide an id.", 400);
   } else {
-    db.collection(EXPENSES_COLLECTION).insertOne(newContact, function (err, doc) {
+    db.collection(EXPENSES_COLLECTION).insertOne(newExpense, function (err, doc) {
       if (err) {
-        handleError(res, err.message, "Failed to create new contact.");
+        handleError(res, err.message, "Failed to create new expense.");
       } else {
         res.status(201).json(doc.ops[0]);
       }
@@ -76,9 +76,9 @@ app.post("/api/expenses", function (req, res) {
 });
 
 /*  "/api/expenses/:id"
- *    GET: find contact by id
- *    PUT: update contact by id
- *    DELETE: deletes contact by id
+ *    GET: find expense by id
+ *    PUT: update expense by id
+ *    DELETE: deletes expense by id
  */
 
 app.get("/api/expenses/:id", function (req, res) {
@@ -86,7 +86,7 @@ app.get("/api/expenses/:id", function (req, res) {
     _id: new ObjectID(req.params.id)
   }, function (err, doc) {
     if (err) {
-      handleError(res, err.message, "Failed to get contact");
+      handleError(res, err.message, "Failed to get expense");
     } else {
       res.status(200).json(doc);
     }
@@ -101,7 +101,7 @@ app.put("/api/expenses/:id", function (req, res) {
     _id: new ObjectID(req.params.id)
   }, updateDoc, function (err, doc) {
     if (err) {
-      handleError(res, err.message, "Failed to update contact");
+      handleError(res, err.message, "Failed to update expense");
     } else {
       updateDoc._id = req.params.id;
       res.status(200).json(updateDoc);
@@ -114,7 +114,7 @@ app.delete("/api/expenses/:id", function (req, res) {
     _id: new ObjectID(req.params.id)
   }, function (err, result) {
     if (err) {
-      handleError(res, err.message, "Failed to delete contact");
+      handleError(res, err.message, "Failed to delete expense");
     } else {
       res.status(200).json(req.params.id);
     }
