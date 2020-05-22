@@ -3,13 +3,13 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
-import { ExpenseComponent } from './expense/expense.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    // TODO MONGO AUTHENTIFICATION
+    // canActivate: [AuthGuard],
   },
   {
     path: 'login',
