@@ -4,6 +4,7 @@ var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
 var EXPENSES_COLLECTION = "expenses";
+var CM_COLLECTION = "currentMonth";
 
 var app = express();
 app.use(bodyParser.json());
@@ -74,6 +75,40 @@ app.post("/api/expenses", function (req, res) {
     });
   }
 });
+
+/*  "/api/currentMonth"
+ *  GET: finds currentMonth
+ *  POST: creates a new currentMonth
+ */
+
+app.get("/api/currentMonth", function (req, res) {
+  db.collection(CM_COLLECTION).find({}).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get currentMonth.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/currentMonth", function (req, res) {
+  var newExpense = req.body;
+  newExpense.createDate = new Date();
+
+  if (!req.body.id) {
+    handleError(res, "Invalid user input", "Must provide an id.", 400);
+  } else {
+    db.collection(CM_COLLECTION).insertOne(newExpense, function (err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new currentMonth.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
+});
+
+
 
 /*  "/api/expenses/:id"
  *    GET: find expense by id
