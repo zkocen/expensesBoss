@@ -33,7 +33,7 @@ export class AllExpensesSingleComponent implements OnInit {
       ...expense,
       archived: true,
     };
-    if (expense.id) {
+    if (expense._id) {
       this.store.dispatch(editExpenseBegin({ expense: newExpense }));
     }
   }
@@ -51,14 +51,14 @@ export class AllExpensesSingleComponent implements OnInit {
         MY_FORMATS.display.monthYearLabel
       ).format(MY_FORMATS.parse.dateInput);
 
-      if (resultCopy.id) {
+      if (resultCopy._id) {
         this.store.dispatch(editExpenseBegin({ expense: resultCopy }));
       }
     });
   }
 
   public trackByIndex(indx: number, expense: Expense) {
-    return expense.id;
+    return expense._id;
   }
 
   ngOnInit() {}

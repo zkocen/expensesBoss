@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./expenses-dashboard.component.scss'],
 })
 export class ExpensesDashboardComponent implements OnInit {
-  public newId$ = this.store.select(idLastExpense);
+  // public newId$ = this.store.select(idLastExpense);
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {}

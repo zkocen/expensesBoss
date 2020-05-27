@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import {
   allExpenses,
   expensesTotalOverall,
-  idLastExpense,
 } from '../store/UI/expenses/expenses.selector';
 @Component({
   selector: 'app-all-expenses',

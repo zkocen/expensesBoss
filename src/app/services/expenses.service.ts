@@ -35,19 +35,20 @@ export class ExpensesService {
         'Content-Type': 'application/json',
       }),
     };
-
+    console.log('expense', expense);
     return this.http.post<Expense>(baseUrl + 'expenses', expense, httpOptions);
   }
 
   public editExpense(expense: Expense): Observable<Expense> {
-    if (expense && expense.id !== undefined) {
+    if (expense && expense._id !== undefined) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
       };
+      console.log('expense', expense);
       return this.http
-        .put<Expense>(baseUrl + 'expenses/' + expense.id, expense, httpOptions)
+        .put<Expense>(baseUrl + 'expenses/' + expense._id, expense, httpOptions)
         .pipe(catchError(this.processHTTPMsgService.handleError));
     }
     console.log('error no expense to archive');

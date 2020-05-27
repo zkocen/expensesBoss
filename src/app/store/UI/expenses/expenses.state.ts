@@ -8,7 +8,7 @@ export interface CurrentMonth {
 }
 
 export interface Expense {
-  id: number;
+  _id: string;
   month: string;
   dateEntered: string;
   recurring: boolean;

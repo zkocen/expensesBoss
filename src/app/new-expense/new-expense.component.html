@@ -1,7 +1,7 @@
 <h2>Add Expense</h2>
 <form novalidate [formGroup]="newExpenseForm" #neform (ngSubmit)="onSubmit()">
 
-  <input formControlName="id" type="hidden" required>
+  <!-- <input formControlName="id" type="hidden" required> -->
 
   <mat-form-field>
     <input matInput formControlName="name" placeholder="e.g. Netflix" type="text" required>

@@ -76,7 +76,7 @@ export class ExpenseComponent implements OnInit {
       MY_FORMATS.parse.dateInput
     ).format(MY_FORMATS.display.monthYearLabel);
     this.editExpenseForm = this.fb.group({
-      id: this.data.expense.id,
+      _id: this.data.expense._id,
       name: [
         this.data.expense.name,
         [

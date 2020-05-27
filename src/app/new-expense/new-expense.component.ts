@@ -24,7 +24,7 @@ export class NewExpenseComponent implements OnInit, OnChanges {
   public newExpenseForm: FormGroup;
   public newExpense: Expense;
   public category = ExpenseType;
-  @Input() public newId: number;
+  // @Input() public newId: string;
 
   @ViewChild('neform', { static: true }) public newExpenseFormDirective;
 
@@ -36,7 +36,7 @@ export class NewExpenseComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges) {
     if (changes) {
-      this.newId = changes.newId.currentValue;
+      // this.newId = changes.newId.currentValue;
     }
   }
 
@@ -74,7 +74,6 @@ export class NewExpenseComponent implements OnInit, OnChanges {
 
   public createForm() {
     this.newExpenseForm = this.fb.group({
-      id: 0,
       name: [
         '',
         [
@@ -107,7 +106,7 @@ export class NewExpenseComponent implements OnInit, OnChanges {
     const form = this.newExpenseForm;
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
-        //clear previous error msg (if any)
+        // clear previous error msg (if any)
         this.formErrors[field] = '';
         const control = form.get(field);
         if (control && control.dirty && !control.valid) {
@@ -129,12 +128,11 @@ export class NewExpenseComponent implements OnInit, OnChanges {
       MY_FORMATS.parse.dateInputPiped
     );
     this.newExpense = this.newExpenseForm.value;
-    this.newExpenseForm.value.id = this.newId;
+    // this.newExpenseForm.value.id = this.newId;
 
     this.store.dispatch(newExpense({ expenses: this.newExpense }));
 
     this.newExpenseForm.reset({
-      id: 0,
       name: '',
       amount: 0,
       paidBy: '',

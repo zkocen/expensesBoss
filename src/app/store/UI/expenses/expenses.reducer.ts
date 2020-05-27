@@ -8,7 +8,7 @@ export const expensesInitialState: ExpensesState = {
   currentMonth: [{ cm: moment().format(MY_FORMATS.parse.dateInput) }],
   expenses: [
     {
-      id: 0,
+      _id: '',
       month: '',
       dateEntered: '',
       recurring: false,
@@ -69,7 +69,7 @@ export const expensesReducer = createReducer(
     (state, { expense }): ExpensesState => ({
       ...state,
       expenses: state.expenses.map((e: Expense) => {
-        if (e.id === expense.id) {
+        if (e._id === expense._id) {
           return expense;
         }
         return e;

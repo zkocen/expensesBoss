@@ -17,7 +17,7 @@ app.use(express.static(distDir));
 var db;
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/expenses", function (err, client) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/", function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -62,9 +62,10 @@ app.get("/api/expenses", function (req, res) {
 app.post("/api/expenses", function (req, res) {
   var newExpense = req.body;
   newExpense.createDate = new Date();
+  console.log('newExpense', newExpense);
 
-  if (!req.body.id) {
-    handleError(res, "Invalid user input", "Must provide an id.", 400);
+  if (!req.body.amount) {
+    handleError(res, "Invalid user input", "Must provide amount.", 400);
   } else {
     db.collection(EXPENSES_COLLECTION).insertOne(newExpense, function (err, doc) {
       if (err) {
@@ -116,7 +117,7 @@ app.post("/api/currentMonth", function (req, res) {
  *    DELETE: deletes expense by id
  */
 
-app.get("/api/expenses/:id", function (req, res) {
+app.get("/api/expenses/:_id", function (req, res) {
   db.collection(EXPENSES_COLLECTION).findOne({
     _id: new ObjectID(req.params.id)
   }, function (err, doc) {
@@ -128,11 +129,11 @@ app.get("/api/expenses/:id", function (req, res) {
   });
 });
 
-app.put("/api/expenses/:id", function (req, res) {
+app.put("/api/expenses/:_id", function (req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 
-  db.collection(EXPENSES_COLLECTION).updateOne({
+  db.collection(EXPENSES_COLLECTION).replaceOne({
     _id: new ObjectID(req.params.id)
   }, updateDoc, function (err, doc) {
     if (err) {
@@ -144,7 +145,7 @@ app.put("/api/expenses/:id", function (req, res) {
   });
 });
 
-app.delete("/api/expenses/:id", function (req, res) {
+app.delete("/api/expenses/:_id", function (req, res) {
   db.collection(EXPENSES_COLLECTION).deleteOne({
     _id: new ObjectID(req.params.id)
   }, function (err, result) {

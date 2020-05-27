@@ -33,8 +33,6 @@ export const selectedMonth = createSelector(
   (expensesState: ExpensesState, exPm: [string, Expense[]][]) => {
     let res = [];
     exPm.map((m) => {
-      console.log('mmm', m);
-      console.log('expensesState', expensesState.currentMonth[0]);
       if (m[0] === expensesState.currentMonth[0].cm) {
         res = m[1];
       }
