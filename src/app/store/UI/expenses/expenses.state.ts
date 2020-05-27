@@ -1,6 +1,10 @@
 export interface ExpensesState {
-  currentMonth: string[];
+  currentMonth: CurrentMonth[];
   expenses: Expense[];
+}
+
+export interface CurrentMonth {
+  cm: string;
 }
 
 export interface Expense {

@@ -33,43 +33,47 @@ export const selectedMonth = createSelector(
   (expensesState: ExpensesState, exPm: [string, Expense[]][]) => {
     let res = [];
     exPm.map((m) => {
-      if (m[0] === expensesState.currentMonth[0]) {
+      console.log('mmm', m);
+      console.log('expensesState', expensesState.currentMonth[0]);
+      if (m[0] === expensesState.currentMonth[0].cm) {
         res = m[1];
       }
     });
 
-    return { currentMonth: [expensesState.currentMonth[0]], expenses: res };
+    return {
+      currentMonth: {
+        cm: [expensesState.currentMonth[0].cm],
+      },
+      expenses: res,
+    };
   }
 );
 
-export const paidByUser = createSelector(
-  selectedMonth,
-  (state: ExpensesState) => {
-    let result = [];
-    if (state.expenses.length > 0) {
-      result = [
-        ...state.expenses
-          .reduce((r, o) => {
-            const key = o.paidBy;
+export const paidByUser = createSelector(exState, (state: ExpensesState) => {
+  let result = [];
+  if (state.expenses.length > 0) {
+    result = [
+      ...state.expenses
+        .reduce((r, o) => {
+          const key = o.paidBy;
 
-            const item =
-              r.get(key) ||
-              Object.assign({}, o, {
-                name: '',
-                amount: 0,
-              });
+          const item =
+            r.get(key) ||
+            Object.assign({}, o, {
+              name: '',
+              amount: 0,
+            });
 
-            item.name += ' ' + o.name;
-            item.amount += o.amount;
-            return r.set(key, item);
-          }, new Map())
-          .values(),
-      ];
-    }
-
-    return result;
+          item.name += ' ' + o.name;
+          item.amount += o.amount;
+          return r.set(key, item);
+        }, new Map())
+        .values(),
+    ];
   }
-);
+
+  return result;
+});
 
 export const debtCalc = createSelector(paidByUser, (state: Expense[]) => {
   const total = state.reduce((a, b) => a + b.amount, 0);

@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { Expense } from './expenses.state';
+import { Expense, CurrentMonth } from './expenses.state';
 
 export const setCurrentMonth = createAction(
   '[Expenses Action] Set Current Month',
-  props<{ currentMonth: string[] }>()
+  props<{ currentMonth: CurrentMonth }>()
 );
 
 export const loadCurrentMonth = createAction(
@@ -11,8 +11,7 @@ export const loadCurrentMonth = createAction(
 );
 
 export const loadCurrentMonthSuccess = createAction(
-  '[Expenses Action] Current Month Succenss',
-  props<{ currentMonth: string[] }>()
+  '[Expenses Action] Current Month Succenss'
 );
 
 export const loadExpenses = createAction('[Expenses Action] Load Expenses');

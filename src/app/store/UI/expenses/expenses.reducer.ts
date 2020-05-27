@@ -5,7 +5,7 @@ import * as ExpensesActions from './expense.actions';
 import { MY_FORMATS } from 'src/app/shared/formats';
 
 export const expensesInitialState: ExpensesState = {
-  currentMonth: [moment().format(MY_FORMATS.parse.dateInput)],
+  currentMonth: [{ cm: moment().format(MY_FORMATS.parse.dateInput) }],
   expenses: [
     {
       id: 0,
@@ -27,7 +27,7 @@ export const expensesReducer = createReducer(
     ExpensesActions.setCurrentMonth,
     (state, { currentMonth }): ExpensesState => ({
       ...state,
-      currentMonth,
+      currentMonth: [currentMonth],
     })
   ),
   on(ExpensesActions.loadExpenses, (state): ExpensesState => ({ ...state })),
@@ -45,9 +45,9 @@ export const expensesReducer = createReducer(
   }),
   on(
     ExpensesActions.loadCurrentMonthSuccess,
-    (state, { currentMonth }): ExpensesState => ({
+    (state): ExpensesState => ({
       ...state,
-      currentMonth,
+      currentMonth: state.currentMonth,
     })
   ),
   on(

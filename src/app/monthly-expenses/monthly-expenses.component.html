@@ -1,6 +1,6 @@
 <app-date-picker></app-date-picker>
 
-<ng-container *ngFor="let user of userPaidDebt$ | async;trackBy: trackByIndex">
+<ng-container *ngFor="let user of userPaidDebt$ | async; trackBy: trackByIndex">
   <mat-card>
     <mat-card-header>
       <mat-card-title-group>
@@ -25,7 +25,7 @@
 </ng-container>
 <br />
 <ng-container *ngIf="selectedMonth$ | async; let cm">
-  <h3>{{ cm.currentMonth }}</h3>
+  <h3>{{ cm.currentMonth.cm[0] }}</h3>
   <ng-container *ngFor="let expense of cm.expenses;let i = index;">
     <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)" (mouseleave)="showDetails = false">
       <mat-card-header>

@@ -4,7 +4,7 @@ import { of, Observable } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 import { ExpensesService } from 'src/app/services/expenses.service';
 import * as ExpensesActions from './expense.actions';
-import { Expense } from './expenses.state';
+import { Expense, CurrentMonth } from './expenses.state';
 import { Action } from '@ngrx/store';
 
 @Injectable()
@@ -34,10 +34,8 @@ export class ExpensesEffect {
       ofType(ExpensesActions.loadCurrentMonth),
       mergeMap(() =>
         this.expensesService.getCurrentMonth().pipe(
-          map((month) => {
-            return ExpensesActions.loadCurrentMonthSuccess({
-              currentMonth: month,
-            });
+          map(() => {
+            return ExpensesActions.loadCurrentMonthSuccess();
           }),
           catchError(() =>
             catchError(() =>

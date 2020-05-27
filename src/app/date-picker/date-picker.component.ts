@@ -54,7 +54,7 @@ export class DatePickerComponent implements OnInit {
 
     this.store.dispatch(
       setCurrentMonth({
-        currentMonth: [selectedM.format(MY_FORMATS.parse.dateInput)],
+        currentMonth: { cm: selectedM.format(MY_FORMATS.parse.dateInput) },
       })
     );
     datepicker.close();
