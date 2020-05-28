@@ -22,7 +22,6 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
   constructor(private store: Store<AppState>, public dialog: MatDialog) {}
 
   public selectedMonth$ = this.store.select(selectedMonth);
-  public userPaidDebt$ = this.store.select(userPaidDebt);
 
   public faTimes = faTimes;
   public showDetails = false;

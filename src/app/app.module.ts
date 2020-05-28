@@ -38,6 +38,7 @@ import { NewExpenseComponent } from './new-expense/new-expense.component'; // An
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AllExpensesSingleComponent } from './all-expenses/all-expenses-single/all-expenses-single.component';
+import { TotalsComponent } from './totals/totals.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { AllExpensesSingleComponent } from './all-expenses/all-expenses-single/a
     AllExpensesComponent,
     NewExpenseComponent,
     AllExpensesSingleComponent,
+    TotalsComponent,
   ],
   imports: [
     CommonModule,
