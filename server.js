@@ -62,7 +62,6 @@ app.get("/api/expenses", function (req, res) {
 app.post("/api/expenses", function (req, res) {
   var newExpense = req.body;
   newExpense.createDate = new Date();
-  console.log('newExpense', newExpense);
 
   if (!req.body.amount) {
     handleError(res, "Invalid user input", "Must provide amount.", 400);
@@ -129,7 +128,7 @@ app.get("/api/expenses/:_id", function (req, res) {
   });
 });
 
-app.put("/api/expenses/:_id", function (req, res) {
+app.put("/api/expenses/:id", function (req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 

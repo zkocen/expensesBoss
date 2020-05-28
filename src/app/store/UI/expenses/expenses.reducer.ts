@@ -80,7 +80,6 @@ export const expensesReducer = createReducer(
     ExpensesActions.editExpenseSuccess,
     (state): ExpensesState => ({
       ...state,
-      expenses: [...state.expenses],
     })
   )
 );

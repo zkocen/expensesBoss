@@ -41,7 +41,6 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
         result.month,
         MY_FORMATS.display.monthYearLabel
       ).format(MY_FORMATS.parse.dateInput);
-      console.log('resultCopy', resultCopy);
       if (resultCopy._id) {
         this.store.dispatch(editExpenseBegin({ expense: resultCopy }));
       }
