@@ -2,6 +2,8 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import './variables.scss';
+@import './spacing';
+@import './component-styles/form';
 
 html,
 body {
@@ -11,6 +13,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: $primary-text-color;
 }
 
 .container {

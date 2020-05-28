@@ -1,0 +1,26 @@
+form {
+  padding: $padding-regular;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  max-width: $form-max-width;
+
+  > .mat-form-field {
+    display: block;
+  }
+
+  > .mat-radio-group {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  > .mat-checkbox {
+    display: flex;
+    justify-content: center;
+  }
+
+  > .mat-select {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
