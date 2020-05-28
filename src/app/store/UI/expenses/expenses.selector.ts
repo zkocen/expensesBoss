@@ -130,7 +130,7 @@ export const debtCalc = createSelector(paidByUser, (state: Expense[]) => {
       res.push({ paidBy: x.paidBy, oves: false, ovedAmount: 0 });
     }
   });
-
+  console.log('res', res);
   return res;
 });
 

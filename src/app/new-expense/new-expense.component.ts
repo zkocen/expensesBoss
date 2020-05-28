@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   ViewChild,
-  Input,
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
@@ -13,6 +12,8 @@ import { Store } from '@ngrx/store';
 import { ExpenseType, MY_FORMATS } from '../shared/formats';
 import { DatePipe } from '@angular/common';
 import { newExpense } from '../store/UI/expenses/expense.actions';
+import { appUsers } from '../store/UI/users/users.selector';
+import { loadCurrentUsers } from '../store/UI/users/users.actions';
 
 @Component({
   selector: 'app-new-expense',
@@ -24,6 +25,7 @@ export class NewExpenseComponent implements OnInit, OnChanges {
   public newExpenseForm: FormGroup;
   public newExpense: Expense;
   public category = ExpenseType;
+  public appUsers$ = this.store.select(appUsers);
   // @Input() public newId: string;
 
   @ViewChild('neform', { static: true }) public newExpenseFormDirective;
@@ -42,6 +44,7 @@ export class NewExpenseComponent implements OnInit, OnChanges {
 
   public ngOnInit() {
     this.createForm();
+    this.store.dispatch(loadCurrentUsers());
   }
 
   public formErrors = {

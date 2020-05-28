@@ -20,9 +20,6 @@ import {
   loadCurrentMonth,
 } from '../store/UI/expenses/expense.actions';
 import { MY_FORMATS } from '../shared/formats';
-import { ExpensesEffect } from '../store/UI/expenses/expenses.effect';
-import { map } from 'rxjs/operators';
-import { ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-date-picker',

@@ -5,6 +5,7 @@ var ObjectID = mongodb.ObjectID;
 
 var EXPENSES_COLLECTION = "expenses";
 var CM_COLLECTION = "currentMonth";
+var USERS_COLLECTION = "users";
 
 var app = express();
 app.use(bodyParser.json());
@@ -76,6 +77,40 @@ app.post("/api/expenses", function (req, res) {
   }
 });
 
+/*  "/api/users"
+ *    GET: finds all users
+ *    POST: creates a new user
+ */
+
+app.get("/api/users", function (req, res) {
+  db.collection(USERS_COLLECTION).find({}).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get users.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/users", function (req, res) {
+  var newExpense = req.body;
+  newExpense.createDate = new Date();
+
+  if (!req.body.name) {
+    handleError(res, "Invalid user input", 400);
+  } else {
+    db.collection(EXPENSES_COLLECTION).insertOne(newExpense, function (err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new user.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
+});
+
+
+
 /*  "/api/currentMonth"
  *  GET: finds currentMonth
  *  POST: creates a new currentMonth
@@ -116,7 +151,7 @@ app.post("/api/currentMonth", function (req, res) {
  *    DELETE: deletes expense by id
  */
 
-app.get("/api/expenses/:_id", function (req, res) {
+app.get("/api/expenses/:id", function (req, res) {
   db.collection(EXPENSES_COLLECTION).findOne({
     _id: new ObjectID(req.params.id)
   }, function (err, doc) {
@@ -144,7 +179,7 @@ app.put("/api/expenses/:id", function (req, res) {
   });
 });
 
-app.delete("/api/expenses/:_id", function (req, res) {
+app.delete("/api/expenses/:id", function (req, res) {
   db.collection(EXPENSES_COLLECTION).deleteOne({
     _id: new ObjectID(req.params.id)
   }, function (err, result) {

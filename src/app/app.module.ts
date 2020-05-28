@@ -40,6 +40,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AllExpensesSingleComponent } from './all-expenses/all-expenses-single/all-expenses-single.component';
 import { TotalsComponent } from './totals/totals.component';
 import { TotalsMonthlyComponent } from './totals/totals-monthly/totals-monthly.component';
+import { UsersEffect } from './store/UI/users/users.effect';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { TotalsMonthlyComponent } from './totals/totals-monthly/totals-monthly.c
         strictActionImmutability: true,
       },
     }),
-    EffectsModule.forRoot([ExpensesEffect]),
+    EffectsModule.forRoot([ExpensesEffect, UsersEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode

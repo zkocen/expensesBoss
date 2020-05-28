@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, Observable } from 'rxjs';
-import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 import { ExpensesService } from 'src/app/services/expenses.service';
 import * as ExpensesActions from './expense.actions';
-import { Expense, CurrentMonth } from './expenses.state';
+import { Expense } from './expenses.state';
 import { Action } from '@ngrx/store';
 
 @Injectable()
