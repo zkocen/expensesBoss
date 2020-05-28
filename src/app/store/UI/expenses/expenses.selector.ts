@@ -58,20 +58,55 @@ export const paidByUser = createSelector(exState, (state: ExpensesState) => {
           const item =
             r.get(key) ||
             Object.assign({}, o, {
-              name: '',
+              name: [],
+              category: [],
               amount: 0,
             });
 
-          item.name += ' ' + o.name;
+          item.name.push(o.name);
+          item.category.push(o.category);
           item.amount += o.amount;
           return r.set(key, item);
         }, new Map())
         .values(),
     ];
   }
-
   return result;
 });
+
+export const paidByUserPerMonth = createSelector(
+  exState,
+  (state: ExpensesState) => {
+    let result = [];
+
+    if (state.expenses.length > 0) {
+      result = [
+        ...state.expenses
+          .reduce((r, o) => {
+            let key;
+            let item;
+            if (o.month === state.currentMonth[0].cm) {
+              key = o.paidBy;
+              item =
+                r.get(key) ||
+                Object.assign({}, o, {
+                  name: [],
+                  category: [],
+                  amount: 0,
+                });
+
+              item.name.push(o.name);
+              item.category.push(o.category);
+              item.amount += o.amount;
+            }
+            return r.set(key, item);
+          }, new Map())
+          .values(),
+      ].filter((item) => item);
+    }
+    return result;
+  }
+);
 
 export const debtCalc = createSelector(paidByUser, (state: Expense[]) => {
   const total = state.reduce((a, b) => a + b.amount, 0);
@@ -98,6 +133,34 @@ export const debtCalc = createSelector(paidByUser, (state: Expense[]) => {
 
   return res;
 });
+
+export const debtCalcPerMonth = createSelector(
+  paidByUserPerMonth,
+  (state: Expense[]) => {
+    const total = state.reduce((a, b) => a + b.amount, 0);
+    const sharePerUser = total / state.length;
+    const res = [];
+
+    state.map((x) => {
+      if (x.amount > sharePerUser) {
+        res.push({
+          paidBy: x.paidBy,
+          oves: false,
+          ovedAmount: x.amount - sharePerUser,
+        });
+      } else if (x.amount < sharePerUser) {
+        res.push({
+          paidBy: x.paidBy,
+          oves: true,
+          ovedAmount: sharePerUser - x.amount,
+        });
+      } else {
+        res.push({ paidBy: x.paidBy, oves: false, ovedAmount: 0 });
+      }
+    });
+    return res;
+  }
+);
 
 export const userPaidDebt = createSelector(
   paidByUser,
