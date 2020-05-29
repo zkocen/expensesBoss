@@ -1,4 +1,4 @@
-import { UsersState } from './users.state';
+import { UsersState, User } from './users.state';
 import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 

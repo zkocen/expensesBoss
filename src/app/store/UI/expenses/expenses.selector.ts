@@ -83,8 +83,8 @@ export const paidByUserPerMonth = createSelector(
       result = [
         ...state.expenses
           .reduce((r, o) => {
-            let key;
-            let item;
+            let key: string;
+            let item: { name: string[]; category: string[]; amount: number };
             if (o.month === state.currentMonth[0].cm) {
               key = o.paidBy;
               item =
@@ -116,21 +116,20 @@ export const debtCalc = createSelector(paidByUser, (state: Expense[]) => {
   state.map((x) => {
     if (x.amount > sharePerUser) {
       res.push({
-        paidBy: x.paidBy,
+        ...x,
         oves: false,
         ovedAmount: x.amount - sharePerUser,
       });
     } else if (x.amount < sharePerUser) {
       res.push({
-        paidBy: x.paidBy,
+        ...x,
         oves: true,
         ovedAmount: sharePerUser - x.amount,
       });
     } else {
-      res.push({ paidBy: x.paidBy, oves: false, ovedAmount: 0 });
+      res.push({ ...x, oves: false, ovedAmount: 0 });
     }
   });
-  console.log('res', res);
   return res;
 });
 
@@ -144,18 +143,18 @@ export const debtCalcPerMonth = createSelector(
     state.map((x) => {
       if (x.amount > sharePerUser) {
         res.push({
-          paidBy: x.paidBy,
+          ...x,
           oves: false,
           ovedAmount: x.amount - sharePerUser,
         });
       } else if (x.amount < sharePerUser) {
         res.push({
-          paidBy: x.paidBy,
+          ...x,
           oves: true,
           ovedAmount: sharePerUser - x.amount,
         });
       } else {
-        res.push({ paidBy: x.paidBy, oves: false, ovedAmount: 0 });
+        res.push({ ...x, oves: false, ovedAmount: 0 });
       }
     });
     return res;
@@ -166,16 +165,12 @@ export const userPaidDebt = createSelector(
   paidByUser,
   debtCalc,
   (pUsr: Expense[], dCals: Expense[]) => {
-    const mergeByPayer = (a, b) =>
-      a.map((itm) => ({
-        ...b.find((item) => item.paidBy === itm.paidBy && item),
+    const mergeByPayer = (a: any[], b: any[]) =>
+      a.map((itm: { _id: string }) => ({
+        ...b.find((item: { _id: string }) => item._id === itm._id && item),
         ...itm,
       }));
 
     return mergeByPayer(pUsr, dCals);
   }
 );
-
-export const idLastExpense = createSelector(exState, (state: ExpensesState) => {
-  return +state.expenses.length + 1;
-});

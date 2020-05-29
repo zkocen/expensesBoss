@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { idLastExpense } from '../store/UI/expenses/expenses.selector';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 
@@ -9,7 +8,6 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./expenses-dashboard.component.scss'],
 })
 export class ExpensesDashboardComponent implements OnInit {
-  // public newId$ = this.store.select(idLastExpense);
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {}

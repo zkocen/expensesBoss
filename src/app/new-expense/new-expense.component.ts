@@ -134,7 +134,6 @@ export class NewExpenseComponent implements OnInit, OnChanges {
     // this.newExpenseForm.value.id = this.newId;
 
     this.store.dispatch(newExpense({ expenses: this.newExpense }));
-
     this.newExpenseForm.reset({
       name: '',
       amount: 0,
