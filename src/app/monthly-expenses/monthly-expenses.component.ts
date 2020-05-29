@@ -61,7 +61,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
       ...expense,
       archived: true,
     };
-    if (expense._id) {
+    if (expense) {
       this.store.dispatch(editExpenseBegin({ expense: newExpense }));
     }
   }

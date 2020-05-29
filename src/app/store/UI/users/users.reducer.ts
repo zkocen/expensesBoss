@@ -9,16 +9,12 @@ export const usersInitialState: UsersState = {
       name: 'Zan',
       username: '',
       password: '',
-      ovedAmount: 0,
-      oves: false,
     },
     {
       _id: '',
       name: 'Sanja',
       username: '',
       password: '',
-      ovedAmount: 0,
-      oves: false,
     },
   ],
 };

@@ -17,6 +17,7 @@ export const expensesInitialState: ExpensesState = {
       amount: 0,
       paidBy: '',
       archived: false,
+      paid: false,
     },
   ],
 };

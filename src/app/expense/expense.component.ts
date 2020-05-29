@@ -95,6 +95,7 @@ export class ExpenseComponent implements OnInit {
       recurring: this.data.expense.recurring,
       category: [this.data.expense.category, [Validators.required]],
       archived: this.data.expense.archived,
+      paid: this.data.expense.paid,
     });
 
     this.editExpenseForm.valueChanges.subscribe((data) => {

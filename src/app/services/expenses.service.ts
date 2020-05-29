@@ -35,7 +35,6 @@ export class ExpensesService {
         'Content-Type': 'application/json',
       }),
     };
-    console.log('expense', expense);
     return this.http.post<Expense>(baseUrl + 'expenses', expense, httpOptions);
   }
 
@@ -46,7 +45,6 @@ export class ExpensesService {
           'Content-Type': 'application/json',
         }),
       };
-      console.log('expense', expense);
       return this.http
         .put<Expense>(baseUrl + 'expenses/' + expense._id, expense, httpOptions)
         .pipe(catchError(this.processHTTPMsgService.handleError));

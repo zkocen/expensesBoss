@@ -33,7 +33,7 @@ export class AllExpensesSingleComponent implements OnInit {
       ...expense,
       archived: true,
     };
-    if (expense._id) {
+    if (expense) {
       this.store.dispatch(editExpenseBegin({ expense: newExpense }));
     }
   }
