@@ -24,6 +24,7 @@ import {
   MatCheckboxModule,
   MatDialogModule,
   MAT_DIALOG_DEFAULT_OPTIONS,
+  MatSidenavModule,
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
@@ -71,6 +72,7 @@ import { UsersEffect } from './store/UI/users/users.effect';
     MatNativeDateModule,
     MatInputModule,
     MatCardModule,
+    MatSidenavModule,
     MatButtonModule,
     MatSelectModule,
     MatRadioModule,

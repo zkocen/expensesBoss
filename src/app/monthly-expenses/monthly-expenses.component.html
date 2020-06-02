@@ -2,7 +2,6 @@
 
 <ng-container *ngIf="selectedMonth$ | async; let cm">
   <h3>{{ cm.currentMonth.cm[0] }}</h3>
-  {{cm | json}}
   <ng-container *ngFor="let expense of cm.expenses;let i = index;">
 
     <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)" (mouseleave)="showDetails = false">

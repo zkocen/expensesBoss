@@ -8,7 +8,5 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./expenses-dashboard.component.scss'],
 })
 export class ExpensesDashboardComponent implements OnInit {
-  constructor(private store: Store<AppState>) {}
-
   ngOnInit() {}
 }
