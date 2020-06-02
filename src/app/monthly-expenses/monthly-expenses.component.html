@@ -2,8 +2,7 @@
 
 <ng-container *ngIf="selectedMonth$ | async; let cm">
   <h3>{{ cm.currentMonth.cm[0] }}</h3>
-  <ng-container *ngFor="let expense of cm.expenses;let i = index;">
-
+  <!--<ng-container *ngFor="let expense of cm.expenses;let i = index;">
     <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)" (mouseleave)="showDetails = false">
       <mat-card-header>
         <mat-card-title-group>
@@ -21,4 +20,43 @@
       </mat-card-content>
     </mat-card>
   </ng-container>
+</ng-container> -->
+
+  <div class="containers-wrap">
+    <div class="example-container">
+      <h2>New</h2>
+
+      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="cm.expenses" [cdkDropListConnectedTo]="[doneList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" cdkDrag [cdkDragData]="expense" *ngFor="let expense of cm.expenses" cdkDrag>
+          <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)"
+            (mouseleave)="showDetails = false">
+            <mat-card-header>
+              <mat-card-title-group>
+                <mat-card-title>
+                  Name: {{ expense.name  }}
+                </mat-card-title>
+              </mat-card-title-group>
+              <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId"
+                class="push-right close-icon" [icon]="faTimes">
+              </fa-icon>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Amount: {{ expense.amount }}</p>
+              <p>Paid: {{ expense.paidBy }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>Paid</h2>
+
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+  </div>
 </ng-container>
