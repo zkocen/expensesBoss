@@ -20,7 +20,7 @@
   <br />
   <mat-radio-group formControlName="paidBy" aria-label="Paid by">
     <ng-container *ngFor="let user of appUsers$ | async">
-      <mat-radio-button value="user.name">{{user.name}}</mat-radio-button>
+      <mat-radio-button value="{{user.name}}">{{user.name}}</mat-radio-button>
     </ng-container>
   </mat-radio-group>
   <mat-error *ngIf="formErrors.paidBy">

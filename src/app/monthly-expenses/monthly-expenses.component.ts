@@ -1,10 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import {
-  selectedMonth,
-  userPaidDebt,
-} from '../store/UI/expenses/expenses.selector';
+import { selectedMonth } from '../store/UI/expenses/expenses.selector';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Expense } from '../store/UI/expenses/expenses.state';
 import { editExpenseBegin } from '../store/UI/expenses/expense.actions';
