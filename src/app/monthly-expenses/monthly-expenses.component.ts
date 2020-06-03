@@ -9,6 +9,11 @@ import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { MY_FORMATS } from '../shared/formats';
 import { ExpenseComponent } from '../expense/expense.component';
+import {
+  moveItemInArray,
+  transferArrayItem,
+  CdkDragDrop,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-monthly-expenses',
@@ -23,7 +28,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
   public faTimes = faTimes;
   public showDetails = false;
   public showDetailsId: number;
-  public done = [];
+  public paidExpenses: Expense[] = [];
   ngOnChanges() {}
 
   public openDialog(expense: Expense) {
@@ -65,4 +70,34 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {}
+
+  public drop(expense: CdkDragDrop<Expense[]>) {
+    if (expense.previousContainer === expense.container) {
+      console.log('here1');
+      moveItemInArray(
+        expense.container.data,
+        expense.previousIndex,
+        expense.currentIndex
+      );
+    } else {
+      console.log('here');
+      if (expense.previousContainer.id === 'cdk-drop-list-0') {
+        expense.previousContainer.data = expense.previousContainer.data.map(
+          (e) => {
+            return {
+              ...e,
+              paid: true,
+            };
+          }
+        );
+
+        transferArrayItem(
+          expense.previousContainer.data,
+          expense.container.data,
+          expense.previousIndex,
+          expense.currentIndex
+        );
+      }
+    }
+  }
 }

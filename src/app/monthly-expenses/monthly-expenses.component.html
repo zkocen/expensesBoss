@@ -22,11 +22,11 @@
   </ng-container>
 </ng-container> -->
 
-  <div class="containers-wrap">
+  <div cdkDropListGroup class="containers-wrap">
     <div class="example-container">
       <h2>New</h2>
 
-      <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-list" cdkDropList [cdkDropListData]="cm.expenses" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let expense of cm.expenses" cdkDrag>
           <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)"
             (mouseleave)="showDetails = false">
@@ -48,13 +48,30 @@
         </div>
       </div>
     </div>
-
-    <div class="example-container">
+    <div class="example-container" fxFlex="50">
       <h2>Paid</h2>
-
-      <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let d of done" cdkDrag>{{item}}</div>
+      <div class="example-list" cdkDropList [cdkDropListData]="paidExpenses" (cdkDropListDropped)="drop($event)">
+        paidExpenses: {{paidExpenses | json}}
+        <div class="example-box" *ngFor="let pe of paidExpenses" cdkDrag>
+          {{pe | json}}
+          <mat-card class="this-month paid" (click)="openDialog(expense)" (mouseover)="over(i)"
+            (mouseleave)="showDetails = false">
+            <mat-card-header>
+              <mat-card-title-group>
+                <mat-card-title>
+                  Name: {{ pe.name  }}
+                </mat-card-title>
+              </mat-card-title-group>
+              <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId"
+                class="push-right close-icon" [icon]="faTimes">
+              </fa-icon>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Amount: {{ pe.amount }}</p>
+              <p>Paid: {{ pe.paidBy }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
     </div>
   </div>
-</ng-container>

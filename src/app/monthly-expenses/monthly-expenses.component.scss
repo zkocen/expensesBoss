@@ -1,8 +1,15 @@
+@import '../../styles.scss';
+
 .this-month {
   cursor: pointer;
 }
 .containers-wrap {
   display: flex;
+
+  .paid {
+    background-color: $lt-green;
+  }
+
   example-container {
     width: 400px;
     max-width: 100%;
