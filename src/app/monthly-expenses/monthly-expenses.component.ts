@@ -24,9 +24,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
   public showDetails = false;
   public showDetailsId: number;
   public done = [];
-  ngOnChanges() {
-    console.log('done', this.done);
-  }
+  ngOnChanges() {}
 
   public openDialog(expense: Expense) {
     const dialogRef = this.dialog.open(ExpenseComponent, {

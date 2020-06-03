@@ -1,15 +1,12 @@
 .drawer-container {
-  width: 100%;
+  width: stretch;
   height: 100%;
-}
-
-.drawer-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
 }
 
 .drawer-sidenav {
   padding: 20px;
+}
+
+.mat-drawer-container {
+  background-color: transparent;
 }

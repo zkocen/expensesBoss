@@ -26,9 +26,8 @@
     <div class="example-container">
       <h2>New</h2>
 
-      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="cm.expenses" [cdkDropListConnectedTo]="[doneList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" cdkDrag [cdkDragData]="expense" *ngFor="let expense of cm.expenses" cdkDrag>
+      <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let expense of cm.expenses" cdkDrag>
           <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)"
             (mouseleave)="showDetails = false">
             <mat-card-header>
@@ -53,9 +52,8 @@
     <div class="example-container">
       <h2>Paid</h2>
 
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+      <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let d of done" cdkDrag>{{item}}</div>
       </div>
     </div>
   </div>

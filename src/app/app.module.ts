@@ -43,6 +43,7 @@ import { TotalsComponent } from './totals/totals.component';
 import { TotalsMonthlyComponent } from './totals/totals-monthly/totals-monthly.component';
 import { UsersEffect } from './store/UI/users/users.effect';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +70,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     HttpClientModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    FlexLayoutModule,
     MatNativeDateModule,
     MatInputModule,
     MatCardModule,
