@@ -2,25 +2,6 @@
 
 <ng-container *ngIf="selectedMonth$ | async; let cm">
   <h3>{{ cm.currentMonth.cm[0] }}</h3>
-  <!--<ng-container *ngFor="let expense of cm.expenses;let i = index;">
-    <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)" (mouseleave)="showDetails = false">
-      <mat-card-header>
-        <mat-card-title-group>
-          <mat-card-title>
-            Name: {{ expense.name  }}
-          </mat-card-title>
-        </mat-card-title-group>
-        <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId" class="push-right close-icon"
-          [icon]="faTimes">
-        </fa-icon>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Amount: {{ expense.amount }}</p>
-        <p>Paid: {{ expense.paidBy }}</p>
-      </mat-card-content>
-    </mat-card>
-  </ng-container>
-</ng-container> -->
 
   <div cdkDropListGroup class="containers-wrap">
     <div class="example-container">
@@ -28,47 +9,51 @@
 
       <div class="example-list" cdkDropList [cdkDropListData]="cm.expenses" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let expense of cm.expenses" cdkDrag>
-          <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)"
-            (mouseleave)="showDetails = false">
-            <mat-card-header>
-              <mat-card-title-group>
-                <mat-card-title>
-                  Name: {{ expense.name  }}
-                </mat-card-title>
-              </mat-card-title-group>
-              <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId"
-                class="push-right close-icon" [icon]="faTimes">
-              </fa-icon>
-            </mat-card-header>
-            <mat-card-content>
-              <p>Amount: {{ expense.amount }}</p>
-              <p>Paid: {{ expense.paidBy }}</p>
-            </mat-card-content>
-          </mat-card>
+          <ng-container *ngIf="!expense.paid">
+            <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)"
+              (mouseleave)="showDetails = false">
+              <mat-card-header>
+                <mat-card-title-group>
+                  <mat-card-title>
+                    Name: {{ expense.name  }}
+                  </mat-card-title>
+                </mat-card-title-group>
+                <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId"
+                  class="push-right close-icon" [icon]="faTimes">
+                </fa-icon>
+              </mat-card-header>
+              <mat-card-content>
+                <p>Amount: {{ expense.amount }}</p>
+                <p>Paid: {{ expense.paidBy }}</p>
+              </mat-card-content>
+            </mat-card>
+          </ng-container>
         </div>
       </div>
     </div>
     <div class="example-container" fxFlex="50">
       <h2>Paid</h2>
       <div class="example-list" cdkDropList [cdkDropListData]="paidExpenses" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let pe of paidExpenses" cdkDrag>
-          <mat-card class="this-month paid" (click)="openDialog(expense)" (mouseover)="over(i)"
-            (mouseleave)="showDetails = false">
-            <mat-card-header>
-              <mat-card-title-group>
-                <mat-card-title>
-                  Name: {{ pe.name  }}
-                </mat-card-title>
-              </mat-card-title-group>
-              <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId"
-                class="push-right close-icon" [icon]="faTimes">
-              </fa-icon>
-            </mat-card-header>
-            <mat-card-content>
-              <p>Amount: {{ pe.amount }}</p>
-              <p>Paid: {{ pe.paidBy }}</p>
-            </mat-card-content>
-          </mat-card>
+        <div class="example-box" *ngFor="let expense of paidExpenses" cdkDrag>
+          <ng-container *ngIf="expense.paid">
+            <mat-card class="this-month paid" (click)="openDialog(expense)" (mouseover)="over(i)"
+              (mouseleave)="showDetails = false">
+              <mat-card-header>
+                <mat-card-title-group>
+                  <mat-card-title>
+                    Name: {{ expense.name  }}
+                  </mat-card-title>
+                </mat-card-title-group>
+                <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId"
+                  class="push-right close-icon" [icon]="faTimes">
+                </fa-icon>
+              </mat-card-header>
+              <mat-card-content>
+                <p>Amount: {{ expense.amount }}</p>
+                <p>Paid: {{ expense.paidBy }}</p>
+              </mat-card-content>
+            </mat-card>
+          </ng-container>
         </div>
       </div>
     </div>
