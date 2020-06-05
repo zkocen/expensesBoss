@@ -1,19 +1,30 @@
 <h2>Edit Expense</h2>
 <form novalidate [formGroup]="editExpenseForm">
-
   <mat-form-field>
-    <input matInput formControlName="name" placeholder="e.g. Netflix" type="text" required>
+    <input
+      matInput
+      formControlName="name"
+      placeholder="e.g. Netflix"
+      type="text"
+      required
+    />
   </mat-form-field>
   <mat-error *ngIf="formErrors.name">
-    {{formErrors.name}}
+    {{ formErrors.name }}
   </mat-error>
   <br />
 
   <mat-form-field>
-    <input matInput formControlName="amount" placeholder="20" type="number" required>
+    <input
+      matInput
+      formControlName="amount"
+      placeholder="20"
+      type="number"
+      required
+    />
   </mat-form-field>
   <mat-error *ngIf="formErrors.amount">
-    {{formErrors.amount}}
+    {{ formErrors.amount }}
   </mat-error>
   <br />
 
@@ -22,7 +33,7 @@
     <mat-radio-button value="Zan">Zan</mat-radio-button>
   </mat-radio-group>
   <mat-error *ngIf="formErrors.paidBy">
-    {{formErrors.paidBy}}
+    {{ formErrors.paidBy }}
   </mat-error>
 
   <br />
@@ -30,20 +41,31 @@
   <br />
 
   <mat-form-field>
-    <input matInput formControlName="month" placeholder="Month" type="month" required>
+    <input
+      matInput
+      formControlName="month"
+      placeholder="Month"
+      type="month"
+      required
+    />
     <mat-error *ngIf="formErrors.paidBy">
-      {{formErrors.month}}
+      {{ formErrors.month }}
     </mat-error>
   </mat-form-field>
 
   <mat-select placeholder="Type?" formControlName="category">
     <mat-option *ngFor="let ctype of categories" [value]="ctype">
-      {{ctype}}
+      {{ ctype }}
     </mat-option>
   </mat-select>
 </form>
 
-
 <div mat-dialog-actions>
-  <button mat-button [disabled]="!editExpenseForm.valid" [mat-dialog-close]="editExpenseForm.value">Close</button>
+  <button
+    mat-button
+    [disabled]="!editExpenseForm.valid"
+    [mat-dialog-close]="editExpenseForm.value"
+  >
+    Close
+  </button>
 </div>

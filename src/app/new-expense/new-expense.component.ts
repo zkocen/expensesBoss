@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 import { newExpense } from '../store/UI/expenses/expense.actions';
 import { appUsers } from '../store/UI/users/users.selector';
 import { loadCurrentUsers } from '../store/UI/users/users.actions';
-
+import { ObjectID } from 'bson';
 @Component({
   selector: 'app-new-expense',
   templateUrl: './new-expense.component.html',
@@ -26,7 +26,6 @@ export class NewExpenseComponent implements OnInit, OnChanges {
   public newExpense: Expense;
   public category = ExpenseType;
   public appUsers$ = this.store.select(appUsers);
-  // @Input() public newId: string;
 
   @ViewChild('neform', { static: true }) public newExpenseFormDirective;
 
@@ -132,7 +131,8 @@ export class NewExpenseComponent implements OnInit, OnChanges {
       MY_FORMATS.parse.dateInputPiped
     );
     this.newExpense = this.newExpenseForm.value;
-    // this.newExpenseForm.value.id = this.newId;
+    this.newExpenseForm.value._id = new ObjectID().toString();
+    console.log('this.newExpense ', this.newExpense);
 
     this.store.dispatch(newExpense({ expenses: this.newExpense }));
     this.newExpenseForm.reset({

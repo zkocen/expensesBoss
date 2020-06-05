@@ -1,12 +1,14 @@
 <app-date-picker></app-date-picker>
 
 <ng-container *ngIf="selectedMonth$ | async; let cm">
+  <pre>
+  {{cm | json}}
+  </pre>
   <h3>{{ cm.currentMonth.cm[0] }}</h3>
 
   <div cdkDropListGroup class="containers-wrap">
     <div class="example-container">
       <h2>New</h2>
-
       <div class="example-list" cdkDropList [cdkDropListData]="cm.expenses" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let expense of cm.expenses" cdkDrag>
           <ng-container *ngIf="!expense.paid">

@@ -153,7 +153,7 @@ app.post("/api/currentMonth", function (req, res) {
 
 app.get("/api/expenses/:id", function (req, res) {
   db.collection(EXPENSES_COLLECTION).findOne({
-    _id: new ObjectID(req.params.id)
+    _id: req.params.id
   }, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get expense");
@@ -168,7 +168,7 @@ app.put("/api/expenses/:id", function (req, res) {
   delete updateDoc._id;
 
   db.collection(EXPENSES_COLLECTION).replaceOne({
-    _id: new ObjectID(req.params.id)
+    _id: req.params.id
   }, updateDoc, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update expense");
@@ -181,7 +181,7 @@ app.put("/api/expenses/:id", function (req, res) {
 
 app.delete("/api/expenses/:id", function (req, res) {
   db.collection(EXPENSES_COLLECTION).deleteOne({
-    _id: new ObjectID(req.params.id)
+    _id: req.params.id
   }, function (err, result) {
     if (err) {
       handleError(res, err.message, "Failed to delete expense");

@@ -1,4 +1,10 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { selectedMonth } from '../store/UI/expenses/expenses.selector';
@@ -13,6 +19,7 @@ import {
   moveItemInArray,
   transferArrayItem,
   CdkDragDrop,
+  CdkDragEnter,
 } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -39,10 +46,13 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe((result: Expense) => {
       const resultCopy: Expense = result;
+
       resultCopy.month = moment(
+        //add current month
         result.month,
         MY_FORMATS.display.monthYearLabel
       ).format(MY_FORMATS.parse.dateInput);
+      console.log('resultCopy', resultCopy);
       if (resultCopy._id) {
         this.store.dispatch(editExpenseBegin({ expense: resultCopy }));
       }
@@ -92,6 +102,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
           expense.currentIndex
         );
         expense.previousContainer.data.splice(expense.previousIndex, 1);
+        // console.log('expense1', expense.item);
       }
       if (expense.previousContainer.id === 'cdk-drop-list-1') {
         transferArrayItem(
@@ -106,6 +117,7 @@ export class MonthlyExpensesComponent implements OnInit, OnChanges {
           expense.currentIndex
         );
         expense.previousContainer.data.splice(expense.previousIndex, 1);
+        // console.log('expense2', expense.item);
       }
     }
   }
