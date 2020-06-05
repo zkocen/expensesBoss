@@ -74,3 +74,9 @@ mat-card {
   padding-left: $padding-regular;
   padding-right: $padding-regular;
 }
+
+.mat-drawer-content {
+  padding-left: $padding-regular;
+  padding-right: $padding-regular;
+  overflow-y: hidden !important;
+}

@@ -1,8 +1,8 @@
 <div cdkDropListGroup class="containers-wrap">
-  <div class="example-container">
+  <div class="expense-container">
     <h2>New</h2>
-    <div class="example-list" cdkDropList [cdkDropListData]="unpaidExpenses" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let expense of unpaidExpenses; index as i; trackBy: trackByFn" cdkDrag>
+    <div class="expense-list" cdkDropList [cdkDropListData]="unpaidExpenses" (cdkDropListDropped)="drop($event)">
+      <div class="expense-box" *ngFor="let expense of unpaidExpenses; index as i; trackBy: trackByFn" cdkDrag>
         <mat-card class="this-month" (click)="openDialog(expense)" (mouseover)="over(i)"
           (mouseleave)="showDetails = false">
           <mat-card-header>
@@ -23,11 +23,11 @@
       </div>
     </div>
   </div>
-  <div class="example-container" fxFlex="50">
+  <div class="expense-container">
     <h2>Paid</h2>
-    <div class="example-list" cdkDropList [cdkDropListData]="paidExpenses" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let expense of paidExpenses; index as i; trackBy: trackByFn" cdkDrag>
-        <mat-card class="this-month paid" (click)="openDialog(expense)" (mouseover)="over(i)"
+    <div class="expense-list" cdkDropList [cdkDropListData]="paidExpenses" (cdkDropListDropped)="drop($event)">
+      <div class="expense-box" *ngFor="let expense of paidExpenses; index as j; trackBy: trackByFn" cdkDrag>
+        <mat-card class="this-month paid" (click)="openDialog(expense)" (mouseover)="overPaid(j)"
           (mouseleave)="showDetails = false">
           <mat-card-header>
             <mat-card-title-group>
@@ -35,8 +35,8 @@
                 Name: {{ expense.name  }}
               </mat-card-title>
             </mat-card-title-group>
-            <fa-icon (click)="archive(expense)" *ngIf="showDetails && i === showDetailsId" class="push-right close-icon"
-              [icon]="faTimes">
+            <fa-icon (click)="archive(expense)" *ngIf="showDetailsPaid && j === showDetailsPaidId"
+              class="push-right close-icon" [icon]="faTimes">
             </fa-icon>
           </mat-card-header>
           <mat-card-content>

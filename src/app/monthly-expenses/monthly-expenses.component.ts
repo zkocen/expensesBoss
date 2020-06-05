@@ -2,8 +2,6 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { selectedMonth } from '../store/UI/expenses/expenses.selector';
-import { MatDialog } from '@angular/material';
-
 @Component({
   selector: 'app-monthly-expenses',
   templateUrl: './monthly-expenses.component.html',

@@ -190,4 +190,3 @@ app.delete("/api/expenses/:id", function (req, res) {
     }
   });
 });
-// curl -H "Content-Type: application/json" -d '{"id": 1,"name": "","amount": 0,"paidBy": "","month": "","dateEntered": "","recurring": false,"category": "groseries","archived": false}' https://limitless-shore-40407.herokuapp.com/api/expenses

@@ -1,12 +1,28 @@
-.drawer-container {
-  width: stretch;
-  height: 100%;
-}
+@import '../../styles.scss';
 
-.drawer-sidenav {
-  padding: 20px;
-}
+:host {
+  position: relative;
+  .drawer-container {
+    width: stretch;
+    height: 100%;
+  }
 
-.mat-drawer-container {
-  background-color: transparent;
+  fa-icon {
+    position: absolute;
+    top: $padding-regular;
+    left: -10px;
+    z-index: 99;
+  }
+
+  .drawer-sidenav-content {
+    padding-top: $padding-regular;
+  }
+
+  .drawer-sidenav {
+    padding: $padding-regular;
+  }
+
+  .mat-drawer-container {
+    background-color: transparent;
+  }
 }

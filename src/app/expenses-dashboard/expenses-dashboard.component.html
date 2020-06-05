@@ -1,7 +1,4 @@
-<h2>Expenses Dashboard</h2>
-<button type="button" mat-button (click)="drawer.toggle()">
-  Totals
-</button>
+<fa-icon (click)=" drawer.toggle()" [icon]="faBars"></fa-icon>
 <mat-drawer-container class="drawer-container" autosize>
   <mat-drawer #drawer class="drawer-sidenav" mode="side">
     <app-totals-dashboard></app-totals-dashboard>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppState } from '../store/app.state';
-import { Store } from '@ngrx/store';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-expenses-dashboard',
@@ -8,5 +7,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./expenses-dashboard.component.scss'],
 })
 export class ExpensesDashboardComponent implements OnInit {
+  public faBars = faBars;
+
   ngOnInit() {}
 }

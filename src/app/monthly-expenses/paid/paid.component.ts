@@ -30,6 +30,8 @@ export class PaidComponent implements OnInit, OnChanges {
   public faTimes = faTimes;
   public showDetails = false;
   public showDetailsId: number;
+  public showDetailsPaid = false;
+  public showDetailsPaidId: number;
   public unpaidExpenses: Expense[] = [];
   public paidExpenses: Expense[] = [];
 
@@ -67,6 +69,11 @@ export class PaidComponent implements OnInit, OnChanges {
   public over(index) {
     this.showDetails = true;
     this.showDetailsId = index;
+  }
+
+  public overPaid(index) {
+    this.showDetailsPaid = true;
+    this.showDetailsPaidId = index;
   }
 
   public archive(expense: Expense) {
