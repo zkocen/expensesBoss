@@ -44,6 +44,7 @@ import { TotalsMonthlyComponent } from './totals/totals-monthly/totals-monthly.c
 import { UsersEffect } from './store/UI/users/users.effect';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PaidComponent } from './monthly-expenses/paid/paid.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AllExpensesSingleComponent,
     TotalsComponent,
     TotalsMonthlyComponent,
+    PaidComponent,
   ],
   imports: [
     CommonModule,

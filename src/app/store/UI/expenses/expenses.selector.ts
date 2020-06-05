@@ -9,8 +9,17 @@ export const allExpenses = createSelector(exState, (state: ExpensesState) => {
   return state.expenses.filter((expense) => expense.archived === false);
 });
 
+export const allExpensesUnpaid = createSelector(
+  exState,
+  (state: ExpensesState) => {
+    return state.expenses.filter(
+      (expense) => expense.archived === false && expense.paid === false
+    );
+  }
+);
+
 export const expensesTotalOverall = createSelector(
-  allExpenses,
+  allExpensesUnpaid,
   (state: Expense[]) => {
     return state.reduce((a, b) => a + b.amount, 0);
   }
@@ -47,45 +56,53 @@ export const selectedMonth = createSelector(
   }
 );
 
-export const paidByUser = createSelector(exState, (state: ExpensesState) => {
-  let result = [];
-  if (state.expenses.length > 0) {
-    result = [
-      ...state.expenses
-        .reduce((r, o) => {
-          const key = o.paidBy;
+export const paidByUser = createSelector(
+  allExpensesUnpaid,
+  (state: Expense[]) => {
+    let result = [];
+    if (state.length > 0) {
+      result = [
+        ...state
+          .reduce((r, o) => {
+            const key = o.paidBy;
 
-          const item =
-            r.get(key) ||
-            Object.assign({}, o, {
-              name: [],
-              category: [],
-              amount: 0,
-            });
+            const item =
+              r.get(key) ||
+              Object.assign({}, o, {
+                name: [],
+                category: [],
+                amount: 0,
+              });
 
-          item.name.push(o.name);
-          item.category.push(o.category);
-          item.amount += o.amount;
-          return r.set(key, item);
-        }, new Map())
-        .values(),
-    ];
+            item.name.push(o.name);
+            item.category.push(o.category);
+            item.amount += o.amount;
+            return r.set(key, item);
+          }, new Map())
+          .values(),
+      ];
+    }
+    return result;
   }
-  return result;
-});
+);
 
 export const paidByUserPerMonth = createSelector(
+  allExpensesUnpaid,
   exState,
-  (state: ExpensesState) => {
+  (state: Expense[], st: ExpensesState) => {
     let result = [];
 
-    if (state.expenses.length > 0) {
+    if (state.length > 0) {
       result = [
-        ...state.expenses
+        ...state
           .reduce((r, o) => {
             let key: string;
-            let item: { name: string[]; category: string[]; amount: number };
-            if (o.month === state.currentMonth[0].cm) {
+            let item: {
+              name: string[];
+              category: string[];
+              amount: number;
+            };
+            if (o.month === st.currentMonth[0].cm) {
               key = o.paidBy;
               item =
                 r.get(key) ||
