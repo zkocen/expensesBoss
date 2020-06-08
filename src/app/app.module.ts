@@ -45,6 +45,8 @@ import { UsersEffect } from './store/UI/users/users.effect';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PaidComponent } from './monthly-expenses/paid/paid.component';
+import { ChartsModule } from './charts/charts.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +86,7 @@ import { PaidComponent } from './monthly-expenses/paid/paid.component';
     MatCheckboxModule,
     FontAwesomeModule,
     MatDialogModule,
+    ChartsModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
