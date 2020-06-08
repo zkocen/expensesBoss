@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Expense } from 'src/app/store/UI/expenses/expenses.state';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
 import { ExpenseComponent } from 'src/app/expense/expense.component';

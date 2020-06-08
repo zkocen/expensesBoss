@@ -12,20 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { baseUrl } from './shared/baseUrl';
 import { MonthlyExpensesComponent } from './monthly-expenses/monthly-expenses.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DatePickerComponent } from './date-picker/date-picker.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
-import {
-  MatInputModule,
-  MatCardModule,
-  MatButtonModule,
-  MatSelectModule,
-  MatRadioModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-  MatSidenavModule,
-} from '@angular/material';
+
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
 import { ExpenseComponent } from './expense/expense.component';
@@ -46,6 +33,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PaidComponent } from './monthly-expenses/paid/paid.component';
 import { ChartsModule } from './charts/charts.module';
+import { DatePickerComponent } from './date-picker/date-picker.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [

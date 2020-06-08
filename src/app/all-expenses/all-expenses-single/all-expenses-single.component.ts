@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { editExpenseBegin } from '../../store/UI/expenses/expense.actions';
 import { Expense } from '../../store/UI/expenses/expenses.state';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ExpenseComponent } from 'src/app/expense/expense.component';
 import { MY_FORMATS } from 'src/app/shared/formats';
 import * as moment from 'moment';
