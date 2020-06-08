@@ -1,1 +1,5 @@
+<h2>Active expenses this month</h2>
+<app-bar-chart [data]="selectedMonthNotPaid$ | async"></app-bar-chart>
+
+<h2>All expenses for the month</h2>
 <app-bar-chart [data]="selectedMonth$ | async"></app-bar-chart>
