@@ -32,7 +32,7 @@ import { UsersEffect } from './store/UI/users/users.effect';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PaidComponent } from './monthly-expenses/paid/paid.component';
-import { ChartsModule } from './charts/charts.module';
+import { ChartsModule } from './charts-dashboard/charts.module';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
